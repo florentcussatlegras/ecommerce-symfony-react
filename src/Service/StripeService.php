@@ -10,12 +10,14 @@ class StripeService
 {
     private StripeClient $stripe;
 
+    public function __construct(private string $apiKeySecret) {}
+
     /**
      * @throws ApiErrorException
      */
     public function createProduct(Product $product): \Stripe\Product
     {
-        return $this->stripe->products->create([
+        return $this->getStripe()->products->create([
             'name' => $product->getName(),
             'description' => $product->getDescription(),
             'active' => $product->isActive()
@@ -27,7 +29,7 @@ class StripeService
      */
     public function createPrice(Product $product): Price
     {
-        return $this->stripe->prices->create([
+        return $this->getStripe()->prices->create([
             'unit_amount' => $product->getPrice(),
             'currency' => 'EUR',
             'product' => $product->getStripeProductId(),
@@ -36,6 +38,6 @@ class StripeService
 
     private function getStripe(): StripeClient
     {
-        return $this->stripe ??= new StripeClient('stripe_api_secret');
+        return $this->stripe ??= new StripeClient($this->apiKeySecret);
     }
 }

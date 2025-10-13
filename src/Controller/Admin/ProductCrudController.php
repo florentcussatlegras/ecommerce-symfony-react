@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Service\StripeService;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -14,6 +15,10 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProductCrudController extends AbstractCrudController
 {
+    public function __construct(private StripeService $stripeService) {
+
+    }
+
     public static function getEntityFqcn(): string
     {
         return Product::class;
@@ -49,9 +54,13 @@ class ProductCrudController extends AbstractCrudController
         /** @var Product $product */
         $product = $entityInstance;
 
-        // $stripeProduct = $this->stripeService->createProduct($product);
+        $stripeProduct = $this->stripeService->createProduct($product);
 
-        dd($product);
+        $product->setStripeProductId($stripeProduct->id);
+
+        $stripePrice = $this->stripeService->createPrice($product);
+
+        $product->setStripePriceId($stripePrice->id);
 
         parent::persistEntity($entityManager, $entityInstance);
     }
