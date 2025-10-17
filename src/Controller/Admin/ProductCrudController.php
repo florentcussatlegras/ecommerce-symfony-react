@@ -64,4 +64,14 @@ class ProductCrudController extends AbstractCrudController
 
         parent::persistEntity($entityManager, $entityInstance);
     }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        /** @var Product $product */
+        $product = $entityInstance;
+
+        $this->stripeService->updateProduct($product);
+
+        parent::updateEntity($entityManager, $entityInstance);
+    }
 }

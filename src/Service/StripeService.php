@@ -36,6 +36,15 @@ class StripeService
         ]);
     }
 
+    public function updateProduct(Product $product): \Stripe\Product
+    {
+        return $this->getStripe()->products->update($product->getStripeProductId(), [
+            'name' => $product->getName(),
+            'description' => $product->getDescription(),
+            'active' => $product->isActive()
+        ]); 
+    }
+
     private function getStripe(): StripeClient
     {
         return $this->stripe ??= new StripeClient($this->apiKeySecret);

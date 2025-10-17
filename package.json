@@ -10,6 +10,7 @@
         "react": "^18.0",
         "react-dom": "^18.0",
         "regenerator-runtime": "^0.13.9",
+        "ts-loader": "^9.5.4",
         "webpack": "^5.74.0",
         "webpack-cli": "^5.1.0"
     },
@@ -20,5 +21,14 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@babel/preset-react": "^7.27.1",
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.1",
+        "@fontsource/montez": "^5.2.8",
+        "@mui/icons-material": "^7.3.4",
+        "@mui/material": "^7.3.4",
+        "playwright": "^1.56.0"
     }
 }
