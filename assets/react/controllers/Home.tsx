@@ -1,4 +1,4 @@
-import { Button, Container } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import { useEffect } from "react";
 import theme from "../../styles/theme";
@@ -23,6 +23,9 @@ export default function Home() {
                 <Appbar />
                 <Banner />
                 <Promotions />
+                <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+                    <Typography variant="h4">Our Products</Typography>
+                </Box>
                 <Products />
             </Container>
         </ThemeProvider>

@@ -11,15 +11,37 @@ import ProductMeta from "./ProductMeta";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import FitScreenIcon from "@mui/icons-material/FitScreen";
+import { useState } from "react";
 
-export default function SingleProducts({ product, matches }) {
+export default function SingleProductDesktop({ product, matches }) {
+    const [showOptions, setShowOptions] = useState(false);
+
+    const handleMouseEnter = () => {
+        setShowOptions(true);
+    };
+
+    const handleMouseLeave = () => {
+        setShowOptions(false);
+    };
+
     return (
-        <div className="relative">
-            <Product>
+        <>
+            <Product
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
                 <ProductImage src={"/images/products/" + product.imageName} />
+                <ProductFavButton isFav={0}>
+                    <FavoriteIcon />
+                </ProductFavButton>
+
+                {showOptions && (
+                    <ProductAddToCart show={showOptions} variant="outlined">Add to Cart</ProductAddToCart>
+                )}
+
                 <ProductMeta product={product} matches={matches} />
-                <ProductActionsWrapper>
-                    <Stack direction="row">
+                <ProductActionsWrapper show={showOptions}>
+                    <Stack direction="column">
                         <ProductFavButton isFav={0}>
                             <FavoriteIcon />
                         </ProductFavButton>
@@ -32,7 +54,6 @@ export default function SingleProducts({ product, matches }) {
                     </Stack>
                 </ProductActionsWrapper>
             </Product>
-            <ProductAddToCart variant="contained">Add to cart</ProductAddToCart>
-        </div>
+        </>
     );
 }
