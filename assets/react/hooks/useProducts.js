@@ -8,4 +8,6 @@ export default function useProducts() {
         .then(response => response.json())
         .then(json => setProducts(json));
     }, []);
+
+    return products;
 }
