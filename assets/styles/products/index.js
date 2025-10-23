@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 import { Colors } from "../theme";
-import { Box, IconButton, Button } from "@mui/material";
+import { Box, IconButton, Button, Paper } from "@mui/material";
 import { slideInBottom, slideInRight } from "../../react/animation";
 
 export const Product = styled(Box)(({ theme }) => ({
@@ -16,7 +16,7 @@ export const Product = styled(Box)(({ theme }) => ({
 export const ProductImage = styled('img')(({ src, theme }) => ({
     src: `url(${src})`,
     width: '100%',
-    background: Colors.light_gray,
+    background: Colors.white,
     padding: '10px',
     [theme.breakpoints.down('md')]: {
         width: '80%',
