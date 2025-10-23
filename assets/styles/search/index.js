@@ -1,4 +1,4 @@
-
+import { TextField } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { Colors } from "../theme";
 
@@ -16,7 +16,7 @@ export const SearchBoxContainer = styled(Box)(({ theme }) => ({
     opacity: 0.9
 }));
 
-export const SearchFiled = styled(TextField)(({  }) => ({
+export const SearchField = styled(TextField)(({ theme }) => ({
     ".MuiInputLabel-root": {
         color: Colors.secondary
     },

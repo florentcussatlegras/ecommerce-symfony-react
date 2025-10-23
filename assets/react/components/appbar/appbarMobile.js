@@ -7,7 +7,7 @@ import { useUIContext } from "../../context/ui";
 
 export default function AppbarMobile({matches}) {
 
-    const { setDrawerOpen } = useUIContext();
+    const { setDrawerOpen, setShowSearchBox } = useUIContext();
 
     return (
         <AppbarContainer>
@@ -17,7 +17,7 @@ export default function AppbarMobile({matches}) {
             <AppbarHeader textAlign={"center"} variant="h4">
                 My Bags
             </AppbarHeader>
-            <IconButton>
+            <IconButton onClick={() => setShowSearchBox(true)}>
                 <SearchIcon />
             </IconButton>
             <Actions matches={matches} />
