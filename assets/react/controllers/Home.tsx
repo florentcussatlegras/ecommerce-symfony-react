@@ -6,6 +6,10 @@ import Appbar from "../components/appbar";
 import Banner from "../components/banner";
 import Promotions from "../components/promotions";
 import Products from "../components/products";
+import Footer from "../components/footer";
+import AppDrawer from "../components/drawer";
+import SearchBox from "../components/search";
+import { UIProvider } from "../context/ui";
 
 export default function Home() {
     useEffect(() => {
@@ -20,13 +24,18 @@ export default function Home() {
                     background: "#fff",
                 }}
             >
-                <Appbar />
-                <Banner />
-                <Promotions />
-                <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
-                    <Typography variant="h4">Our Products</Typography>
-                </Box>
-                <Products />
+                <UIProvider>
+                    <Appbar />
+                    <Banner />
+                    <Promotions />
+                    <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+                        <Typography variant="h4">Our Products</Typography>
+                    </Box>
+                    <Products />
+                    <Footer />
+                    <AppDrawer />
+                    <SearchBox />
+                </UIProvider>
             </Container>
         </ThemeProvider>
     );
