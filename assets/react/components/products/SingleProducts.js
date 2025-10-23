@@ -15,8 +15,11 @@ import useDialogModal from "../../hooks/useDialogModal";
 import ProductDetail from "../productDetail";
 
 export default function SingleProducts({ product, matches }) {
-
-    const [ProductDetailDialog, showProductDetailDialog, closeProductDetailDialog] = useDialogModal(ProductDetail);
+    const [
+        ProductDetailDialog,
+        showProductDetailDialog,
+        closeProductDetailDialog,
+    ] = useDialogModal(ProductDetail);
 
     return (
         <>
@@ -31,7 +34,9 @@ export default function SingleProducts({ product, matches }) {
                         <ProductActionButton>
                             <ShareIcon color="primary" />
                         </ProductActionButton>
-                        <ProductActionButton onClick={() => showProductDetailDialog()}>
+                        <ProductActionButton
+                            onClick={() => showProductDetailDialog()}
+                        >
                             <FitScreenIcon color="primary" />
                         </ProductActionButton>
                     </Stack>

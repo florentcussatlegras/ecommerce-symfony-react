@@ -74,44 +74,46 @@ export default function ProductDetail({ open, onClose, product }) {
                             src={"/images/products/" + product.imageName}
                         />
                     </Product>
+                    <ProductDetailInfoWrapper>
+                        <Typography variant="subtitle1">SKU 123</Typography>
+                        <Typography variant="subtitle1">
+                            Availability: 5 in stock
+                        </Typography>
+                        <Typography sx={{ lineHeight: 2 }} variant="h4">
+                            {product.name}
+                        </Typography>
+                        <Typography variant="body">
+                            {product.description}
+                        </Typography>
+                        <Box
+                            sx={{ mt: 4 }}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="space-between"
+                        >
+                            <IncDec />
+                            <Button variant="contained">Add to cart</Button>
+                        </Box>
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            sx={{ mt: 4, color: Colors.light }}
+                        >
+                            <FavoriteIcon sx={{ mr: 2 }} />
+                            Add to wishlist
+                        </Box>
+                        <Box
+                            sx={{
+                                mt: 4,
+                                color: Colors.light,
+                            }}
+                        >
+                            <FacebookIcon />
+                            <TwitterIcon sx={{ pl: 2 }} />
+                            <InstagramIcon sx={{ pl: theme.spacing(4) }} />
+                        </Box>
+                    </ProductDetailInfoWrapper>
                 </ProductDetailWrapper>
-                <ProductDetailInfoWrapper>
-                    <Typography variant="subtitle1">SKU 123</Typography>
-                    <Typography variant="subtitle1">
-                        Availability: 5 in stock
-                    </Typography>
-                    <Typography sx={{ lineHeight: 2 }} variant="h4">
-                        {product.name}
-                    </Typography>
-                    <Typography variant="body">
-                        {product.description}
-                    </Typography>
-                    <Box
-                        sx={{ mt: 4 }}
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="space-between"
-                    >
-                        <IncDec />
-                        <Button variant="contained">Add to cart</Button>
-                    </Box>
-                    <Box
-                        display="flex"
-                        alignItems="center"
-                        sx={{ mt: 4, color: Colors.light }}
-                    >
-                        <FavoriteIcon sx={{ mr: 2 }} />
-                        Add to wishlist
-                    </Box>
-                    <Box sx={{
-                        mt: 4,
-                        color: Colors.light
-                    }}>
-                        <FacebookIcon />
-                        <TwitterIcon sx={{ pl: 2 }} />
-                        <InstagramIcon sx={{ pl: theme.spacing(4) }} />
-                    </Box>
-                </ProductDetailInfoWrapper>
             </DialogContent>
         </Dialog>
     );
