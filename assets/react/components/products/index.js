@@ -4,7 +4,7 @@ import useProducts from "../../hooks/useProducts";
 import SingleProduct from "./SingleProducts";
 import SingleProductDesktop from "./SingleProductDesktop";
 
-export default function Products() {
+export default function Products({ addItemToShoppingCart, shoppingCart }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -14,20 +14,16 @@ export default function Products() {
 
     const renderProducts = products.map((product) => (
         <Grid
-            // item
             key={product.id}
-            // xs={2}
-            // sm={4}
-            // md={4}
             size={{ xs: 2, sm: 4, md: 4 }}
             display="flex"
             flexDirection={"column"}
             alignItems="center"
         >
             {matches ? (
-                <SingleProduct product={product} matches={matches} />
+                <SingleProduct product={product} matches={matches} addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} />
             ) : (
-                <SingleProductDesktop product={product} matches={matches} />
+                <SingleProductDesktop product={product} matches={matches} addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} />
             )}
         </Grid>
     ));

@@ -3,16 +3,16 @@ import { useTheme } from "@mui/material/styles";
 import AppbarMobile from "./appbarMobile";
 import AppbarDesktop from "./appbarDesktop";
 
-export default function Appbar() {
+export default function Appbar({ shoppingCart }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
     return (
         <>
             {matches ? (
-                <AppbarMobile matches={matches} />
+                <AppbarMobile matches={matches} shoppingCart={shoppingCart} />
             ) : (
-                <AppbarDesktop matches={matches} />
+                <AppbarDesktop matches={matches} shoppingCart={shoppingCart} />
             )}
         </>
     );

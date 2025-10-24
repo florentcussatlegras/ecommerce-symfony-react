@@ -1,4 +1,4 @@
-import { ListItemButton, ListItemIcon, Divider } from "@mui/material";
+import { ListItemButton, ListItemIcon, Divider, Badge } from "@mui/material";
 import {
     MyList,
     ActionIconsContainerMobile,
@@ -9,11 +9,17 @@ import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Colors } from "../../../styles/theme";
 
-export default function Actions({ matches }) {
+export default function Actions({ matches, shoppingCart }) {
 
     const Component = matches 
         ? ActionIconsContainerMobile
         : ActionIconsContainerDesktop;
+
+    console.log(shoppingCart);
+
+    const calculateTotalQuantity = () => {
+        return shoppingCart?.items?.map((item) => item.quantity).reduce((a, b) => a + b, 0);
+    }
 
     return (
         <Component>
@@ -30,7 +36,9 @@ export default function Actions({ matches }) {
                             color: matches && Colors.secondary,
                         }}
                     >
-                        <ShoppingCartIcon />
+                        <Badge badgeContent={calculateTotalQuantity()} color="secondary">
+                            <ShoppingCartIcon />
+                        </Badge>
                     </ListItemIcon>
                 </ListItemButton>
                 <Divider orientation="vertical" flexItem />

@@ -10,11 +10,14 @@ import Footer from "../components/footer";
 import AppDrawer from "../components/drawer";
 import SearchBox from "../components/search";
 import { UIProvider } from "../context/ui";
+import useShoppingCart from "../hooks/useShoppingCart";
 
 export default function Home() {
     useEffect(() => {
         document.title = "React Material UI - Home";
     }, []);
+
+    const {addItemToShoppingCart, shoppingCart} = useShoppingCart();
 
     return (
         <ThemeProvider theme={theme}>
@@ -25,13 +28,13 @@ export default function Home() {
                 }}
             >
                 <UIProvider>
-                    <Appbar />
+                    <Appbar shoppingCart={shoppingCart} />
                     <Banner />
                     <Promotions />
                     <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
                         <Typography variant="h4">Our Products</Typography>
                     </Box>
-                    <Products />
+                    <Products addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} />
                     <Footer />
                     <AppDrawer />
                     <SearchBox />

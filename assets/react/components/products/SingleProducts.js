@@ -14,7 +14,7 @@ import FitScreenIcon from "@mui/icons-material/FitScreen";
 import useDialogModal from "../../hooks/useDialogModal";
 import ProductDetail from "../productDetail";
 
-export default function SingleProducts({ product, matches }) {
+export default function SingleProducts({ product, matches, addItemToShoppingCart, shoppingCart }) {
     const [
         ProductDetailDialog,
         showProductDetailDialog,
@@ -42,7 +42,7 @@ export default function SingleProducts({ product, matches }) {
                     </Stack>
                 </ProductActionsWrapper>
             </Product>
-            <ProductAddToCart variant="contained">Add to cart</ProductAddToCart>
+            <ProductAddToCart variant="contained" onClick={() => addItemToShoppingCart(product)}>Add to cart</ProductAddToCart>
             <ProductDetailDialog product={product} />
         </>
     );

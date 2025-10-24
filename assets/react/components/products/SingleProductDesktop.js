@@ -15,7 +15,7 @@ import useDialogModal from "../../hooks/useDialogModal";
 import ProductDetail from "../productDetail";
 import { useState } from "react";
 
-export default function SingleProductDesktop({ product, matches }) {
+export default function SingleProductDesktop({ product, matches, addItemToShoppingCart, shoppingCart }) {
     const [showOptions, setShowOptions] = useState(false);
     const [
         ProductDetailDialog,
@@ -43,8 +43,8 @@ export default function SingleProductDesktop({ product, matches }) {
                 </ProductFavButton>
 
                 {showOptions && (
-                    <ProductAddToCart show={showOptions} variant="outlined">
-                        Add to Cart
+                    <ProductAddToCart show={showOptions} variant="outlined" onClick={() => addItemToShoppingCart(product)}>
+                        Add to Cart foo
                     </ProductAddToCart>
                 )}
 

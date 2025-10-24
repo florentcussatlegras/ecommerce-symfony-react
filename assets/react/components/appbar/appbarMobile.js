@@ -5,7 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Actions from "./actions";
 import { useUIContext } from "../../context/ui";
 
-export default function AppbarMobile({matches}) {
+export default function AppbarMobile({matches, shoppingCart}) {
 
     const { setDrawerOpen, setShowSearchBox } = useUIContext();
 
@@ -20,7 +20,7 @@ export default function AppbarMobile({matches}) {
             <IconButton onClick={() => setShowSearchBox(true)}>
                 <SearchIcon />
             </IconButton>
-            <Actions matches={matches} />
+            <Actions matches={matches} shoppingCart={shoppingCart}  />
         </AppbarContainer>
     );
 }
