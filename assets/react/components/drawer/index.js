@@ -9,7 +9,7 @@ import {
 import { styled } from "@mui/system";
 import { useUIContext } from "../../context/ui";
 import { DrawerCloseButton } from "../../../styles/appbar";
-import CloseIcon from "@mui/icons-material/close";
+import CloseIcon from "@mui/icons-material/Close";
 import { lighten } from "polished";
 import { Colors } from "../../../styles/theme";
 

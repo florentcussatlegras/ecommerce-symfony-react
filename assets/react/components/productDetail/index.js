@@ -9,7 +9,7 @@ import {
     Typography,
     useMediaQuery,
 } from "@mui/material";
-import CloseIcon from "@mui/icons-material/close";
+import CloseIcon from "@mui/icons-material/Close";
 import { Colors } from "../../../styles/theme";
 import { Product, ProductImage } from "../../../styles/products";
 import { styled } from "@mui/material/styles";

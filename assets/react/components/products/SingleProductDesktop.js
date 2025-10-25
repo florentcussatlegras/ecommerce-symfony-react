@@ -44,7 +44,7 @@ export default function SingleProductDesktop({ product, matches, addItemToShoppi
 
                 {showOptions && (
                     <ProductAddToCart show={showOptions} variant="outlined" onClick={() => addItemToShoppingCart(product)}>
-                        Add to Cart foo
+                        Add to Cart
                     </ProductAddToCart>
                 )}
 

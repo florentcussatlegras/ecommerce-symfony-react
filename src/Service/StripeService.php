@@ -3,6 +3,8 @@
 namespace App\Service;
 
 use App\Entity\Product;
+use App\Model\ShoppingCart;
+use Stripe\Checkout\Session;
 use Stripe\Price;
 use Stripe\StripeClient;
 
@@ -43,6 +45,30 @@ class StripeService
             'description' => $product->getDescription(),
             'active' => $product->isActive()
         ]); 
+    }
+
+    public function createCheckoutSession(ShoppingCart $shoppingCart): Session
+    {
+        $lineItems = [];
+
+        foreach ($shoppingCart->items as $item) {
+            $lineItems[] = [
+                'price' => $item->product->getStripePriceId(),
+                'quantity' => $item->quantity
+            ];
+        }
+
+        return $this->getStripe()->checkout->sessions->create([
+            'currency' => 'EUR',
+            'line_items' => $lineItems,
+            'mode' => 'payment',
+            'success_url' => 'https://127.0.0.1:8000/stripe/success?session_id={CHECKOUT_SESSION_ID}'
+        ]);
+    }
+
+    public function getCheckoutSession(string $sessionId): Session
+    {
+        return $this->getStripe()->checkout->sessions->retrieve($sessionId);
     }
 
     private function getStripe(): StripeClient
