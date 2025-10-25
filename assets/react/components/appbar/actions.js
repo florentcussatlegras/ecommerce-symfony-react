@@ -8,6 +8,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Colors } from "../../../styles/theme";
+import { visit } from "../../../utils";
 
 export default function Actions({ matches, shoppingCart }) {
 
@@ -15,7 +16,10 @@ export default function Actions({ matches, shoppingCart }) {
         ? ActionIconsContainerMobile
         : ActionIconsContainerDesktop;
 
-    console.log(shoppingCart);
+    const showShoppingCart = () => {
+        visit('/shopping-cart')
+    }
+    
 
     const calculateTotalQuantity = () => {
         return shoppingCart?.items?.map((item) => item.quantity).reduce((a, b) => a + b, 0);
@@ -35,6 +39,7 @@ export default function Actions({ matches, shoppingCart }) {
                             justifyContent: "center",
                             color: matches && Colors.secondary,
                         }}
+                        onClick={showShoppingCart}
                     >
                         <Badge badgeContent={calculateTotalQuantity()} color="secondary">
                             <ShoppingCartIcon />
