@@ -19,6 +19,10 @@ export default function Actions({ matches, shoppingCart }) {
     const showShoppingCart = () => {
         visit('/shopping-cart')
     }
+
+    const showProfile = () => {
+        visit('/profile')
+    }
     
 
     const calculateTotalQuantity = () => {
@@ -74,6 +78,7 @@ export default function Actions({ matches, shoppingCart }) {
                             justifyContent: "center",
                             color: matches && Colors.secondary,
                         }}
+                        onClick={showProfile}
                     >
                         <PersonIcon />
                     </ListItemIcon>
