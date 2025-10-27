@@ -43,12 +43,10 @@ class RegistrationType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank([
                         'message' => 'Veuillez saisir un mot de passe',
-                        'groups' => ['registration'],
                     ]),
                     new Assert\Regex([
-                        'pattern' => "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/",
-                        'message' => 'Le mot de passe doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus',
-                        'groups' => ['registration'],
+                        'pattern' => "/^.{4,}$/",
+                        'message' => 'Le mot de passe doit contenir au moins 4 caractères ou plus',
                     ])
                 ],
             ])
@@ -64,7 +62,6 @@ class RegistrationType extends AbstractType
                     'constraints' => [
                         new Assert\IsTrue([
                                 'message' => 'Pour continuer vous devez accepter nos conditions',
-                                'groups' => ['registration']
                             ]
                         )
                     ]
