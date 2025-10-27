@@ -13,12 +13,17 @@ import SearchBox from "../components/search";
 import { UIProvider } from "../context/ui";
 import useShoppingCart from "../hooks/useShoppingCart";
 
-export default function Home() {
+import useProductCategories from "../hooks/useProductCategories";
+
+export default function Product({categoryId}) {
     useEffect(() => {
         document.title = "React Material UI - Home";
     }, []);
 
     const {addItemToShoppingCart, shoppingCart} = useShoppingCart();
+
+    const category = useProductCategories(categoryId);
+    console.log(category);
 
     return (
         <ThemeProvider theme={theme}>
@@ -30,13 +35,7 @@ export default function Home() {
             >
                 <UIProvider>
                     <Appbar shoppingCart={shoppingCart} />
-                    <Banner />
-                    <Promotions />
-                    {/* <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
-                        <Typography variant="h4">Our Products</Typography>
-                    </Box> */}
-                    {/* <Products addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} /> */}
-                    {/* <ProductCategory /> */}
+                    <Products addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} category={category} />
                     <Footer />
                     <AppDrawer />
                     <SearchBox />

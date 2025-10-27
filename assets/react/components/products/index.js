@@ -1,16 +1,20 @@
 import { useTheme } from "@mui/material/styles";
-import { Box, Container, Grid, useMediaQuery } from "@mui/material";
+import { Box, Typography, Grid, useMediaQuery } from "@mui/material";
 import useProducts from "../../hooks/useProducts";
 import SingleProduct from "./SingleProducts";
 import SingleProductDesktop from "./SingleProductDesktop";
 
-export default function Products({ addItemToShoppingCart, shoppingCart }) {
+export default function Products({
+    addItemToShoppingCart,
+    shoppingCart,
+    category,
+}) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const products = useProducts();
-
-    console.log(products);
+    console.log('ici');
+    console.log(category.id);
+    const products = useProducts(category.id);
 
     const renderProducts = products.map((product) => (
         <Grid
@@ -21,23 +25,38 @@ export default function Products({ addItemToShoppingCart, shoppingCart }) {
             alignItems="center"
         >
             {matches ? (
-                <SingleProduct product={product} matches={matches} addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} />
+                <SingleProduct
+                    product={product}
+                    matches={matches}
+                    addItemToShoppingCart={addItemToShoppingCart}
+                    shoppingCart={shoppingCart}
+                />
             ) : (
-                <SingleProductDesktop product={product} matches={matches} addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} />
+                <SingleProductDesktop
+                    product={product}
+                    matches={matches}
+                    addItemToShoppingCart={addItemToShoppingCart}
+                    shoppingCart={shoppingCart}
+                />
             )}
         </Grid>
     ));
 
     return (
-        <Grid
-            container
-            spacing={{ xs: 2, md: 6 }}
-            justifyContent={"left"}
-            sx={{ margin: "10px 4px 10px 4px" }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-        >
-            {renderProducts}
-        </Grid>
+        <>
+            <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+                <Typography variant="h4">{category.name}</Typography>
+            </Box>
+            <Grid
+                container
+                spacing={{ xs: 2, md: 6 }}
+                justifyContent={"left"}
+                sx={{ margin: "10px 4px 10px 4px" }}
+                columns={{ xs: 4, sm: 8, md: 12 }}
+            >
+                {renderProducts}
+            </Grid>
+        </>
 
         // <Grid container spacing={2}>
         //     <Grid size={8}>

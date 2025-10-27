@@ -12,6 +12,7 @@ import { DrawerCloseButton } from "../../../styles/appbar";
 import CloseIcon from "@mui/icons-material/Close";
 import { lighten } from "polished";
 import { Colors } from "../../../styles/theme";
+import useProductCategories from "../../hooks/useProductCategories";
 
 const MiddleDivider = styled((props) => (
     <Divider variant="middle" {...props} />
@@ -19,6 +20,7 @@ const MiddleDivider = styled((props) => (
 
 export default function AppDrawer() {
     const { drawerOpen, setDrawerOpen } = useUIContext();
+    const categories = useProductCategories();
 
     return (
         <>
@@ -36,25 +38,11 @@ export default function AppDrawer() {
 
             <Drawer open={drawerOpen}>
                 <List>
-                    <ListItemButton>
-                        <ListItemText>Home</ListItemText>
-                    </ListItemButton>
-                    {/* <MiddleDivider /> */}
-                    <ListItemButton>
-                        <ListItemText>Categories</ListItemText>
-                    </ListItemButton>
-                    {/* <MiddleDivider /> */}
-                    <ListItemButton>
-                        <ListItemText>Products</ListItemText>
-                    </ListItemButton>
-                    {/* <MiddleDivider /> */}
-                    <ListItemButton>
-                        <ListItemText>About US</ListItemText>
-                    </ListItemButton>
-                    {/* <MiddleDivider /> */}
-                    <ListItemButton>
-                        <ListItemText>Contact Us</ListItemText>
-                    </ListItemButton>
+                    {categories.map((category) => (
+                        <ListItemButton>
+                            <ListItemText>{category.name}</ListItemText>
+                        </ListItemButton>
+                    ))}
                 </List>
             </Drawer>
         </>

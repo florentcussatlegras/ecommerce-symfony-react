@@ -1,12 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-export default function useProductCategories() {
+export default function useProductCategories(id) {
     const [productCategories, setProductCategories] = useState([]);
 
     useEffect(() => {
-        fetch('/api/product-categories')
-        .then(response => response.json())
-        .then(json => setProductCategories(json));
+        if (id == undefined) {
+            fetch("/api/product-categories")
+                .then((response) => response.json())
+                .then((json) => setProductCategories(json));
+        } else {
+            fetch(`/api/product-category/${id}`)
+                .then((response) => response.json())
+                .then((json) => setProductCategories(json));
+        }
     }, []);
 
     return productCategories;
