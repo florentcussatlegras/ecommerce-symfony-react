@@ -6,6 +6,7 @@ use App\Entity\Product;
 use App\Service\StripeService;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
@@ -37,6 +38,8 @@ class ProductCrudController extends AbstractCrudController
         yield MoneyField::new('price')
             ->setCurrency('EUR')
             ->setRequired(true);
+
+        yield AssociationField::new('category');
 
         yield Field::new('imageFile', 'Image')
             ->setFormType(VichFileType::class)
