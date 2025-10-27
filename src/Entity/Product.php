@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\ProductCategory;
+
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -57,6 +59,9 @@ class Product
 
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'imageName', size: 'imageSize')]
     private ?File $imageFile = null;
+
+    #[ORM\ManyToOne(targetEntity: ProductCategory::class, inversedBy: 'products')]
+    private $category;
 
     public function getId(): ?int
     {
@@ -193,6 +198,18 @@ class Product
     public function setStripePriceId(?string $stripePriceId): static
     {
         $this->stripePriceId = $stripePriceId;
+
+        return $this;
+    }
+
+    public function getCategory(): ?ProductCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?ProductCategory $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

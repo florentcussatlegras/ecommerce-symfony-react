@@ -1,3 +1,5 @@
+
+
 {% extends "login/_layout.html.twig" %}
 
 {% block title %}S'inscrire{% endblock %}
@@ -6,40 +8,29 @@
 
     {{ form_start(registerForm, {'attr' : {'novalidate' : 'novalidate'}}) }}
 
-        {{ form_errors(registerForm) }}
-
         <h1 class="font-bold text-xl">
             S'inscrire
         </h1>
-        <div class="mt-2 text-gray-500 text-sm">
-            {# A few more clicks to sign in to your account! #}
-            Encore quelques clics pour vous connecter à votre compte !
-        </div>
+
+        {{ form_errors(registerForm) }}
         
-        <div class="mt-8 form-group text-sm">
+        <div class="mt-8 text-sm">
 
             <div class="mb-2">
                 {{ form_label(registerForm.email) }}
-                <span class="text-red-500">{{ form_errors(registerForm.email) }}</span>
-                {{ form_widget(registerForm.email) }}
+                <span class="text-red-500 mt-2">{{ form_errors(registerForm.email) }}</span>
+                {{ form_widget(registerForm.email, {'attr': {'class': 'px-4 py-2 w-full rounded-full mt-2 bg-blue-50'}}) }}
             </div>
-
-            {# <div class="mb-2">
-                {{ form_label(registerForm.username) }}
-                <span class="text-red-500">{{ form_errors(registerForm.username) }}</span>
-                {{ form_widget(registerForm.username) }}
-            </div> #}
-
 
             <div 
                 class="mt-6"
                 {# {{ stimulus_controller('password-validation') }} #}
             >
                 {{ form_label(registerForm.plainPassword) }}
-                <span class="text-red-500">{{ form_errors(registerForm.plainPassword) }}</span>
+                <span class="text-red-500 mt-2">{{ form_errors(registerForm.plainPassword) }}</span>
        
                 <div data-controller="password-visibility" class="relative flex items-center">
-                    {{ form_widget(registerForm.plainPassword, {'id': 'psw'}) }}
+                    {{ form_widget(registerForm.plainPassword, {'id': 'psw', 'attr': {'class': 'px-4 py-2 w-full rounded-full mt-2 bg-blue-50'}}) }}
                     {# {{ include('partials/_button_visibility_pwd.html.twig') }} #}
                 </div>
 
@@ -67,10 +58,11 @@
             </div>
         </div>
 
-        <div class="button-group text-center mt-4">
-            <button type="submit" class="bg-light-blue text-white w-full font-bold p-2 text-base cursor-pointer rounded-lg">Valider</button>
-            {# <div class="mt-5">Déja inscrit? <br><a href="{{ path('app_login') }}" class="text-light-blue text-sm">Identifiez-vous</a></div> #}
-        </div>
+        <button type="submit" class="mt-6 bg-gray-500 text-white uppercase px-4 py-2 rounded-full w-full">Valider</button>
+
+        <p class="mt-2 text-sm">
+            Vous avez déja un compte? <a href={{ path('app_login') }} class="text-sky-800">Identifiez-vous</a>
+        </p>
 
     {{ form_end(registerForm) }}
 

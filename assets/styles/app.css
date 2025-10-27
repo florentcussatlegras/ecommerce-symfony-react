@@ -1,3 +1,12 @@
 @import "tailwindcss";
+@mport "tailwindcss/preflight";
+@tailwind utilities;
 
+@font-face {
+    font-family: "Montez";
+    src: url('https://fonts.googleapis.com/css2?family=Montez&display=swap');
+}
 
+.navbrand {
+    font-family: "Montez";
+}
