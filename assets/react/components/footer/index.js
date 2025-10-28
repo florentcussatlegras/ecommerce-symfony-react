@@ -14,7 +14,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import SendIcon from "@mui/icons-material/Send";
 
-export default function Footer() {
+export default function Footer2() {
     return (
         <Box
             sx={{

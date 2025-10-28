@@ -3,6 +3,7 @@ import { useUIContext } from "../../context/ui";
 import { SearchBoxContainer, SearchField } from "../../../styles/search";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
 export default function SearchBox() {
     const { showSearchBox, setShowSearchBox } = useUIContext();

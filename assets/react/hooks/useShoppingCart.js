@@ -6,7 +6,6 @@ export default function useShoppingCart() {
 
     const addItemToShoppingCart = (product) => {
         setLoading(true);
-        console.log(`/session/shopping-cart/${product.id}`);
         fetch(`/session/shopping-cart/${product.id}`, {
             method: "POST",
         })

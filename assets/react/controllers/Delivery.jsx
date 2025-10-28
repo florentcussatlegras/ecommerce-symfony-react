@@ -12,26 +12,31 @@ import AppDrawer from "../components/drawer";
 import SearchBox from "../components/search";
 import { UIProvider } from "../context/ui";
 import useShoppingCart from "../hooks/useShoppingCart";
+import DeliveryAddress from "../components/delivery";
 
-import useProductCategories from "../hooks/useProductCategories";
-import Layout from "./Layout";
-
-export default function Product({ categoryId }) {
+export default function Delivery() {
     useEffect(() => {
         document.title = "React Material UI - Home";
     }, []);
 
-    const { addItemToShoppingCart, shoppingCart } = useShoppingCart();
-
-    const category = useProductCategories(categoryId);
+    const {addItemToShoppingCart, shoppingCart} = useShoppingCart();
 
     return (
-        <Layout>
-            <Products
-                addItemToShoppingCart={addItemToShoppingCart}
-                shoppingCart={shoppingCart}
-                category={category}
-            />
-        </Layout>
+        <ThemeProvider theme={theme}>
+            <Container
+                maxWidth="xl"
+                sx={{
+                    background: "#fff",
+                }}
+            >
+                <UIProvider>
+                    <Appbar shoppingCart={shoppingCart} />
+                    <DeliveryAddress />
+                    <Footer />
+                    <AppDrawer />
+                    <SearchBox />
+                </UIProvider>
+            </Container>
+        </ThemeProvider>
     );
 }

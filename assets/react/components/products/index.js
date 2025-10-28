@@ -12,8 +12,6 @@ export default function Products({
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    console.log('ici');
-    console.log(category.id);
     const products = useProducts(category.id);
 
     const renderProducts = products.map((product) => (

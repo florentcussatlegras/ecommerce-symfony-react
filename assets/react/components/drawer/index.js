@@ -13,6 +13,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { lighten } from "polished";
 import { Colors } from "../../../styles/theme";
 import useProductCategories from "../../hooks/useProductCategories";
+import { useState } from "react";
 
 const MiddleDivider = styled((props) => (
     <Divider variant="middle" {...props} />

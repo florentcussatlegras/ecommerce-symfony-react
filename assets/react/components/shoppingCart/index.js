@@ -26,7 +26,8 @@ export default function ShoppingCart({
                         <Typography variant="h5">Mon panier</Typography>
                     </Grid>
                     <Grid>
-                        <Button variant="contained" color="primary" onClick={createCheckoutSession}>
+                        {/* <Button variant="contained" color="primary" onClick={createCheckoutSession}> */}
+                        <Button variant="contained" color="primary" onClick={() => visit('/')}>
                             Procéder au paiement
                         </Button>
                     </Grid>

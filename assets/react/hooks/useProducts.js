@@ -4,9 +4,11 @@ export default function useProducts(id) {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch(`/api/products/${id}`)
-            .then((response) => response.json())
-            .then((json) => setProducts(json));
+        if (id != undefined) {
+            fetch(`/api/products/${id}`)
+                .then((response) => response.json())
+                .then((json) => setProducts(json));
+        }
     }, [id]);
 
     return products;
