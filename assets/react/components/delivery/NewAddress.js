@@ -12,10 +12,11 @@ const NewAddressFormSchema = z.object({
     address: z.string().min(3).max(50),
     phoneNumber: z
         .string()
-        .regex(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/, 'Invalid phone number'),
-    zipCode: z
-        .string()
-        .regex(/^\d{5}-\d{3}$/, 'Invalid postal code'),
+        .regex(
+            /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/,
+            "Invalid phone number"
+        ),
+    zipCode: z.string().regex(/^\d{5}$/, "Invalid postal code"),
     city: z.string().min(2),
     country: z.string().min(2),
 });
@@ -49,6 +50,19 @@ export default function NewAddress() {
             const flattened = z.flattenError(result.error);
             console.log(flattened.fieldErrors);
             setErrors(flattened.fieldErrors);
+        } else {
+            const data = new FormData();
+            data.append("data", JSON.stringify(formData));
+
+            fetch(`api/addresses/new`, {
+                method: "POST",
+                body: data,
+            })
+                .then((response) => response.json())
+                .then((json) => console.log(json))
+                .finally(() => {
+                    console.log('OK');
+                });
         }
     };
 
