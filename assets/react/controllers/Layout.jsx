@@ -18,13 +18,20 @@ const Layout = ({ children }) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <UIProvider>
-                <Appbar shoppingCart={shoppingCart} />
-                {children}
-                <Footer />
-                <AppDrawer />
-                <SearchBox />
-            </UIProvider>
+            <Container
+                maxWidth="xl"
+                sx={{
+                    background: "#fff",
+                }}
+            >
+                <UIProvider>
+                    <Appbar shoppingCart={shoppingCart} />
+                    {children}
+                    <Footer />
+                    <AppDrawer />
+                    <SearchBox />
+                </UIProvider>
+            </Container>
         </ThemeProvider>
     );
 };

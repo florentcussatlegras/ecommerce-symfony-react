@@ -18,30 +18,10 @@ export default function Home() {
         document.title = "React Material UI - Home";
     }, []);
 
-    const {addItemToShoppingCart, shoppingCart} = useShoppingCart();
-
     return (
-        <ThemeProvider theme={theme}>
-            <Container
-                maxWidth="xl"
-                sx={{
-                    background: "#fff",
-                }}
-            >
-                <UIProvider>
-                    <Appbar shoppingCart={shoppingCart} />
-                    <Banner />
-                    <Promotions />
-                    {/* <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
-                        <Typography variant="h4">Our Products</Typography>
-                    </Box> */}
-                    {/* <Products addItemToShoppingCart={addItemToShoppingCart} shoppingCart={shoppingCart} /> */}
-                    {/* <ProductCategory /> */}
-                    <Footer />
-                    <AppDrawer />
-                    <SearchBox />
-                </UIProvider>
-            </Container>
-        </ThemeProvider>
+        <Layout>
+            <Banner />
+            <Promotions />
+        </Layout>
     );
 }

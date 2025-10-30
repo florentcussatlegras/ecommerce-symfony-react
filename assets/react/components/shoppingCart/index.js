@@ -5,6 +5,7 @@ import { visit } from "../../../utils";
 export default function ShoppingCart({
     removeItemFromShoppingCart,
     shoppingCart,
+    totalPrices
 }) {
     const createCheckoutSession = () => {
         fetch("/stripe/checkout-sessions", {
@@ -28,7 +29,7 @@ export default function ShoppingCart({
                     <Grid>
                         {/* <Button variant="contained" color="primary" onClick={createCheckoutSession}> */}
                         <Button variant="contained" color="primary" onClick={() => visit('/')}>
-                            Procéder au paiement
+                            Valider mon panier
                         </Button>
                     </Grid>
                 </Grid>
@@ -37,6 +38,7 @@ export default function ShoppingCart({
                 removeItemFromShoppingCart={removeItemFromShoppingCart}
                 shoppingCart={shoppingCart}
             />
+            {totalPrices}
         </>
     );
 }

@@ -7,6 +7,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import NewAddress from "./NewAddress";
+import { useState } from "react";
 
 const MiddleDivider = styled((props) => (
     <Divider variant="middle" {...props} />
@@ -21,8 +22,42 @@ const AddressContainer = styled(Box)(() => ({
     padding: "2px 8px",
 }));
 
-export default function DeliveryAddress() {
+export default function Delivery() {
     const addresses = useAddresses();
+    const [loading, setLoading] = useState(false);
+
+    const [formData, setFormData] = useState({
+        address_delivery: "1",
+        address_billing: "1",
+    });
+
+    const handleSelect = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(formData);
+
+        setLoading(true);
+        fetch(`/session/address/delivery/${formData.address_delivery}`, {
+            method: "POST",
+        })
+            .then((response) => response.json())
+            .finally(() => {
+                setLoading(false);
+            });
+
+        setLoading(true);
+        fetch(`/session/address/billing/${formData.address_billing}`, {
+            method: "POST",
+        })
+            .then((response) => response.json())
+            .finally(() => {
+                setLoading(false);
+            });
+    };
 
     return (
         <>
@@ -36,7 +71,7 @@ export default function DeliveryAddress() {
                     flexDirection: { xs: "column", md: "row" },
                 }}
             >
-                <Box component="form" sx={{ width: { xs: '100%', md: '1/3' } }}>
+                <Box component="form" sx={{ width: { xs: "100%", md: "1/3" } }}>
                     {addresses.length > 0 && (
                         <>
                             <AddressContainer>
@@ -47,12 +82,14 @@ export default function DeliveryAddress() {
                                     >
                                         Adresse de livraison
                                     </FormLabel>
-                                    <RadioGroup>
+                                    <RadioGroup defaultValue={1}>
                                         {addresses.map((address) => (
                                             <FormControlLabel
+                                                name="address_delivery"
                                                 value={address.id}
                                                 control={<Radio />}
                                                 label={`${address.address} ${address.zipcode} ${address.city}`}
+                                                onClick={handleSelect}
                                             />
                                         ))}
                                     </RadioGroup>
@@ -66,12 +103,14 @@ export default function DeliveryAddress() {
                                     >
                                         Adresse de facturation
                                     </FormLabel>
-                                    <RadioGroup>
+                                    <RadioGroup defaultValue={1}>
                                         {addresses.map((address) => (
                                             <FormControlLabel
+                                                name="address_billing"
                                                 value={address.id}
                                                 control={<Radio />}
                                                 label={`${address.address} ${address.zipcode} ${address.city}`}
+                                                onClick={handleSelect}
                                             />
                                         ))}
                                     </RadioGroup>
@@ -80,11 +119,15 @@ export default function DeliveryAddress() {
                         </>
                     )}
                     <br />
-                    <Button type="submit" variant="contained">
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        onClick={handleSubmit}
+                    >
                         Valider mes adresses
                     </Button>
                 </Box>
-                <Box sx={{ width: { xs: '100%', md: '2/3' } }}>
+                <Box sx={{ width: { xs: "100%", md: "2/3" } }}>
                     <NewAddress />
                 </Box>
             </Box>

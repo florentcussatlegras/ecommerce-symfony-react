@@ -35,6 +35,7 @@ class UserAddressController extends AbstractController
     public function newAddresses(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManager): Response 
     {
         $userAddress = $serializer->deserialize($request->request->get("data"), UserAddress::class, 'json');
+        $userAddress->setUser($this->getUser());
         $entityManager->persist($userAddress);
         $entityManager->flush();
 

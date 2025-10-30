@@ -2,7 +2,7 @@ import { Button, FormLabel } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import Autocomplete from "react-google-autocomplete";
+import { visit } from "../../../utils";
 
 import { z } from "zod";
 
@@ -46,9 +46,7 @@ export default function NewAddress() {
         const result = NewAddressFormSchema.safeParse(formData);
 
         if (!result.success) {
-            // console.log(console.log(z.flattenError(result.error).fieldErrors));
             const flattened = z.flattenError(result.error);
-            console.log(flattened.fieldErrors);
             setErrors(flattened.fieldErrors);
         } else {
             const data = new FormData();
@@ -61,7 +59,7 @@ export default function NewAddress() {
                 .then((response) => response.json())
                 .then((json) => console.log(json))
                 .finally(() => {
-                    console.log('OK');
+                    visit('/delivery');
                 });
         }
     };

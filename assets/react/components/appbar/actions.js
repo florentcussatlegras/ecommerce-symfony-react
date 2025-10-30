@@ -23,7 +23,6 @@ export default function Actions({ matches, shoppingCart }) {
     const showProfile = () => {
         visit('/profile')
     }
-    
 
     const calculateTotalQuantity = () => {
         return shoppingCart?.items?.map((item) => item.quantity).reduce((a, b) => a + b, 0);
