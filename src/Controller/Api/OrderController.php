@@ -20,10 +20,9 @@ class OrderController extends AbstractController
     {
         $order = !$session->has('user_order') ? new UserOrder() : $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());
 
-        $order = new UserOrder();
-        $order->setReference('123457');
+        $order->setReference('1234591');
         $order->setUser($this->getUser());
-        $order->setIsValid(1);
+        $order->setIsValid(0);
         $addressDelivery = $entityManager->getRepository(UserAddress::class)->findOneById($session->get('address_delivery')->getId());
         $addressBilling = $entityManager->getRepository(UserAddress::class)->findOneById($session->get('address_billing')->getId());
         $order->setProducts($sessionService->getShoppingCart()->items->toArray());

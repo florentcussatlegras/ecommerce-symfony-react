@@ -39,7 +39,6 @@ export default function Delivery() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(formData);
 
         setLoading(true);
         fetch(`/session/address/delivery/${formData.address_delivery}`, {
@@ -60,9 +59,7 @@ export default function Delivery() {
             });
 
         setLoading(true);
-        fetch("api/order/create", {
-            method: "POST",
-        })
+        fetch("api/order/create")
             .then((response) => response.json())
             .finally(() => {
                 setLoading(false);
