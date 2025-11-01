@@ -31,12 +31,11 @@ export default function Order({ shoppingCart, totalPrices, sessionAddresses }) {
                         alignItems="center"
                         gap={2}
                     >
-                        {/* <Button variant="contained" color="primary" onClick={createCheckoutSession}> */}
                         <Box>{totalPrices} € TTC</Box>
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={() => visit("/")}
+                            onClick={createCheckoutSession}
                         >
                             Procéder au paiement
                         </Button>

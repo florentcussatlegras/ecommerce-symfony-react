@@ -2,12 +2,11 @@
 
 namespace App\Controller\Api;
 
-use App\Entity\Order;
-use App\Entity\Task;
 use App\Entity\UserAddress;
 use App\Entity\UserOrder;
 use App\Service\SessionService;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -20,7 +19,7 @@ class OrderController extends AbstractController
     {
         $order = !$session->has('user_order') ? new UserOrder() : $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());
 
-        $order->setReference('1234591');
+        $order->setReference(0);
         $order->setUser($this->getUser());
         $order->setIsValid(0);
         $addressDelivery = $entityManager->getRepository(UserAddress::class)->findOneById($session->get('address_delivery')->getId());
@@ -38,5 +37,30 @@ class OrderController extends AbstractController
         $entityManager->flush();
 
         return new Response('OK');
+    }
+
+    #[Route('api/order/validate', name: 'api_order_validate', methods: 'GET')]
+    public function validate(SessionInterface $session, EntityManagerInterface $entityManager): Response 
+    {
+        $order = $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());
+
+        if (!$order) {
+            throw new \Exception('Aucune commande en session');
+        }
+
+        $order->setReference('1234591');
+        $order->setIsValid(1);
+
+        if ($session->has('user_order')) {
+            $session->remove('user_order');
+            $session->remove('shoppingCart');
+            $session->remove('address_delivery');
+            $session->remove('address_billing');
+        }
+
+        $entityManager->persist($order);
+        $entityManager->flush();
+
+        return new Response('La commande a été validée.');
     }
 }

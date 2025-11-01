@@ -1,8 +1,22 @@
 import { CheckCircleOutline } from "@mui/icons-material";
-import { Typography, Box, Button } from "@mui/material";
+import { Typography, Box, Button, Container } from "@mui/material";
 import { formatPrice, visit } from "../../../utils";
+import { useEffect, useState } from "react";
 
 export default function Success({ amountTotal }) {
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        console.log('success order');
+        setLoading(true);
+        fetch('/api/order/validate')
+            .then(json => console.log(json))
+            .finally(() => {
+                setLoading(false);
+            });
+    }, []);
+
   return (
     <Container>
         <Box>
