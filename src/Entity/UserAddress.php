@@ -39,7 +39,7 @@ class UserAddress
     #[ORM\Column(length: 180)]
     private ?string $complement = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'adresses')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'adresses', cascade:['persist'])]
     private $user;
 
     public function getId(): ?int

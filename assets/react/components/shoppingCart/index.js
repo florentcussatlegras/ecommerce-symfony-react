@@ -28,7 +28,7 @@ export default function ShoppingCart({
                     </Grid>
                     <Grid>
                         {/* <Button variant="contained" color="primary" onClick={createCheckoutSession}> */}
-                        <Button variant="contained" color="primary" onClick={() => visit('/')}>
+                        <Button variant="contained" color="primary" onClick={() => visit('/delivery')}>
                             Valider mon panier
                         </Button>
                     </Grid>
@@ -37,8 +37,8 @@ export default function ShoppingCart({
             <ShoppingCartTable
                 removeItemFromShoppingCart={removeItemFromShoppingCart}
                 shoppingCart={shoppingCart}
+                totalPrices={totalPrices}
             />
-            {totalPrices}
         </>
     );
 }

@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import NewAddress from "./NewAddress";
 import { useState } from "react";
+import { visit } from "../../../utils";
 
 const MiddleDivider = styled((props) => (
     <Divider variant="middle" {...props} />
@@ -57,6 +58,17 @@ export default function Delivery() {
             .finally(() => {
                 setLoading(false);
             });
+
+        setLoading(true);
+        fetch("api/order/create", {
+            method: "POST",
+        })
+            .then((response) => response.json())
+            .finally(() => {
+                setLoading(false);
+            });
+
+        visit('/order');
     };
 
     return (

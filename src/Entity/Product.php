@@ -23,6 +23,10 @@ class Product
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups('product:read')]
+    private ?string $reference = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups('product:read')]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -76,6 +80,18 @@ class Product
     public function setName(?string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): static
+    {
+        $this->reference = $reference;
 
         return $this;
     }

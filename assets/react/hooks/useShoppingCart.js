@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 export default function useShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState([]);
     const [totalPrices, setTotalPrices] = useState(0);
+    const [sessionAddresses, setSessionAddresses] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const addItemToShoppingCart = (product) => {
@@ -44,6 +45,13 @@ export default function useShoppingCart() {
             .finally(() => {
                 setLoading(false);
             });
+
+        fetch("/session/addresses")
+            .then((response) => response.json())
+            .then((json) => setSessionAddresses(json))
+            .finally(() => {
+                setLoading(false);
+            });;
     }, []);
 
     return {
@@ -51,6 +59,7 @@ export default function useShoppingCart() {
         removeItemFromShoppingCart,
         shoppingCart,
         totalPrices,
+        sessionAddresses,
         loading,
     };
 }

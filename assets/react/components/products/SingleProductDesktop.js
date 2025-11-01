@@ -38,9 +38,9 @@ export default function SingleProductDesktop({ product, matches, addItemToShoppi
                 onMouseLeave={handleMouseLeave}
             >
                 <ProductImage src={"/images/products/" + product.imageName} />
-                <ProductFavButton isFav={0}>
+                {/* <ProductFavButton isFav={0}>
                     <FavoriteIcon />
-                </ProductFavButton>
+                </ProductFavButton> */}
 
                 {showOptions && (
                     <ProductAddToCart show={showOptions} variant="outlined" onClick={() => addItemToShoppingCart(product)}>
@@ -50,10 +50,10 @@ export default function SingleProductDesktop({ product, matches, addItemToShoppi
 
                 <ProductMeta product={product} matches={matches} />
                 <ProductActionsWrapper show={showOptions}>
-                    <Stack direction="column">
-                        <ProductFavButton isFav={0}>
+                    <Stack direction="row">
+                        {/* <ProductFavButton isFav={0}>
                             <FavoriteIcon />
-                        </ProductFavButton>
+                        </ProductFavButton> */}
                         <ProductActionButton>
                             <ShareIcon color="primary" />
                         </ProductActionButton>
@@ -62,7 +62,7 @@ export default function SingleProductDesktop({ product, matches, addItemToShoppi
                         >
                             <FitScreenIcon color="primary" />
                         </ProductActionButton>
-                    </Stack>
+                    </Stack> 
                 </ProductActionsWrapper>
             </Product>
             <ProductDetailDialog product={product} />

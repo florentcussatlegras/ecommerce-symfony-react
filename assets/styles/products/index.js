@@ -21,10 +21,10 @@ export const ProductImage = styled('img')(({ src, theme }) => ({
     [theme.breakpoints.down('md')]: {
         width: '80%',
         padding: '24px',
-    },
+    }
 }));
 
-export const ProductActionButton = styled(IconButton)(() => ({
+export const ProductActionButton = styled(IconButton)(({ theme }) => ({
     background: Colors.white,
     margin: 4,
 }));
@@ -32,7 +32,7 @@ export const ProductActionButton = styled(IconButton)(() => ({
 export const ProductFavButton = styled(ProductActionButton, {
     shouldForwardProp: (prop) => prop !== "isFav",
 })(({ isFav, theme }) => ({
-    color: isFav ? Colors.primary : Colors.light,
+    color: Colors.primary ,
     [theme.breakpoints.up("md")]: {
         position: "absolute",
         right: 0,
@@ -47,7 +47,7 @@ export const ProductAddToCart = styled(Button, {
     fontSize: "12px",
     [theme.breakpoints.up("md")]: {
         position: "absolute",
-        bottom: "2%",
+        bottom: "15%",
         width: "300px",
         padding: "10px 5px",
         animation:
@@ -72,7 +72,7 @@ export const ProductActionsWrapper = styled(Box, {
         display: show ? "visible" : "none",
         position: "absolute",
         right: 0,
-        top: "20%",
+        top: 0,
         animation:
             show &&
             `${slideInRight} 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both`,

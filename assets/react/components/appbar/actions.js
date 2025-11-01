@@ -49,8 +49,8 @@ export default function Actions({ matches, shoppingCart }) {
                         </Badge>
                     </ListItemIcon>
                 </ListItemButton>
-                <Divider orientation="vertical" flexItem />
-                <ListItemButton
+                {/* <Divider orientation="vertical" flexItem /> */}
+                {/* <ListItemButton
                     sx={{
                         justifyContent: "center",
                     }}
@@ -65,7 +65,7 @@ export default function Actions({ matches, shoppingCart }) {
                         <FavoriteIcon />
                     </ListItemIcon>
                 </ListItemButton>
-                <Divider orientation="vertical" flexItem />
+                <Divider orientation="vertical" flexItem /> */}
                 <ListItemButton
                     sx={{
                         justifyContent: "center",
@@ -82,7 +82,6 @@ export default function Actions({ matches, shoppingCart }) {
                         <PersonIcon />
                     </ListItemIcon>
                 </ListItemButton>
-                <Divider orientation="vertical" flexItem />
             </MyList>
         </Component>
     );
