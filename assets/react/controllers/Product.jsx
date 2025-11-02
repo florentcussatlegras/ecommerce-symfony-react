@@ -22,16 +22,38 @@ export default function Product({ categoryId }) {
     }, []);
 
     const { addItemToShoppingCart, shoppingCart } = useShoppingCart();
+    console.log('toto');
+    console.log(shoppingCart);
 
     const category = useProductCategories(categoryId);
 
     return (
-        <Layout>
-            <Products
-                addItemToShoppingCart={addItemToShoppingCart}
-                shoppingCart={shoppingCart}
-                category={category}
-            />
-        </Layout>
+        // <Layout>
+        //     <Products
+        //         addItemToShoppingCart={addItemToShoppingCart}
+        //         shoppingCart={shoppingCart}
+        //         category={category}
+        //     />
+        // </Layout>
+        <ThemeProvider theme={theme}>
+            <Container
+                maxWidth="xl"
+                sx={{
+                    background: "#fff",
+                }}
+            >
+                <UIProvider>
+                    <Appbar shoppingCart={shoppingCart} />
+                    <Products
+                        addItemToShoppingCart={addItemToShoppingCart}
+                        shoppingCart={shoppingCart}
+                        category={category}
+                    />
+                    <Footer />
+                    <AppDrawer />
+                    <SearchBox />
+                </UIProvider>
+            </Container>
+        </ThemeProvider>
     );
 }

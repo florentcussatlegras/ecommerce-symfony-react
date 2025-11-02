@@ -53,7 +53,7 @@ export default function ShoppingCartTable({
                                         </Box>
                                     </TableCell>
                                     <TableCell>{item.quantity}</TableCell>
-                                    <TableCell>{item.product.price} €</TableCell>
+                                    <TableCell>{item.product.price / 100} €</TableCell>
                                     <TableCell>
                                         <IconButton
                                             onClick={() =>
@@ -71,7 +71,7 @@ export default function ShoppingCartTable({
                 </Table>
             </TableContainer>
             <Box marginY={5} display={"flex"} justifyContent={"right"}>
-                Total: {totalPrices} € TTC
+                Total: {totalPrices / 100} € TTC
             </Box>
         </>
     );

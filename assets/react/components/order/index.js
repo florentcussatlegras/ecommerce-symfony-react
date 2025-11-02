@@ -31,7 +31,7 @@ export default function Order({ shoppingCart, totalPrices, sessionAddresses }) {
                         alignItems="center"
                         gap={2}
                     >
-                        <Box>{totalPrices} € TTC</Box>
+                        <Box>{totalPrices / 100} € TTC</Box>
                         <Button
                             variant="contained"
                             color="primary"
@@ -76,7 +76,7 @@ export default function Order({ shoppingCart, totalPrices, sessionAddresses }) {
                                 />{" "}
                                 <span>{item.product.name}</span>
                                 <span>{item.quantity}</span>
-                                <span>{item.product.price} €</span>
+                                <span>{item.product.price / 100} €</span>
                             </Box>
                         ))}
                     </Box>

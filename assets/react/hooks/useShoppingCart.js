@@ -31,6 +31,7 @@ export default function useShoppingCart() {
     };
 
     useEffect(() => {
+        console.log('je suis la');
         setLoading(true);
         fetch("/session/shopping-cart")
             .then((response) => response.json())
@@ -53,6 +54,9 @@ export default function useShoppingCart() {
                 setLoading(false);
             });;
     }, []);
+
+    console.log('within shopping cart');
+    console.log(shoppingCart);
 
     return {
         addItemToShoppingCart,

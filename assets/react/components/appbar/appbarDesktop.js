@@ -11,6 +11,8 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
     const { setShowSearchBox } = useUIContext();
     const categories = useProductCategories();
 
+    console.log(shoppingCart);
+
     return (
         <AppbarContainer>
             <AppbarHeader>My Bags</AppbarHeader>

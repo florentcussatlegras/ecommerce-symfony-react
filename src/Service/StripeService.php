@@ -32,7 +32,7 @@ class StripeService
     public function createPrice(Product $product): Price
     {
         return $this->getStripe()->prices->create([
-            'unit_amount' => $product->getPrice(),
+            'unit_amount' => $product->getPrice() / 100,
             'currency' => 'EUR',
             'product' => $product->getStripeProductId(),
         ]);

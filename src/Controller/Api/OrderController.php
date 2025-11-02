@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class OrderController extends AbstractController
 {
     #[Route('api/order/create', name: 'api_order_create', methods: 'GET')]
-    public function create(SessionService $sessionService, SessionInterface $session, EntityManagerInterface $entityManager): Response 
+    public function create(SessionService $sessionService, SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
         $order = !$session->has('user_order') ? new UserOrder() : $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());
 
@@ -40,16 +40,20 @@ class OrderController extends AbstractController
     }
 
     #[Route('api/order/validate', name: 'api_order_validate', methods: 'GET')]
-    public function validate(SessionInterface $session, EntityManagerInterface $entityManager): Response 
+    public function validate(SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
         $order = $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());
 
-        if (!$order) {
-            throw new \Exception('Aucune commande en session');
+        if (!$order || $order->isValid() == 1) {
+            throw $this->createNotFoundException('La commande n\'existe pas');
         }
 
-        $order->setReference('1234591');
+        $lastOrder = $entityManager->getRepository(UserOrder::class)->findOneBy(['isValid' => 1], ['id' => 'DESC']);
+        $reference = !$lastOrder ? 1 : $lastOrder->getReference() + 1;
+        
+        $order->setReference($reference);
         $order->setIsValid(1);
+
 
         if ($session->has('user_order')) {
             $session->remove('user_order');

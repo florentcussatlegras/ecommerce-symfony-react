@@ -12,6 +12,7 @@ import AppDrawer from "../components/drawer";
 import SearchBox from "../components/search";
 import { UIProvider } from "../context/ui";
 import useShoppingCart from "../hooks/useShoppingCart";
+import Layout from "./Layout";
 
 export default function Home() {
     useEffect(() => {
