@@ -8,7 +8,6 @@ export default function Success({ amountTotal }) {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        console.log('success order');
         setLoading(true);
         fetch('/api/order/validate')
             .then(json => console.log(json))

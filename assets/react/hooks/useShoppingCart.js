@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 export default function useShoppingCart() {
     const [shoppingCart, setShoppingCart] = useState([]);
     const [totalPrices, setTotalPrices] = useState(0);
-    const [sessionAddresses, setSessionAddresses] = useState([]);
     const [loading, setLoading] = useState(false);
 
     const addItemToShoppingCart = (product) => {
@@ -31,7 +30,6 @@ export default function useShoppingCart() {
     };
 
     useEffect(() => {
-        console.log('je suis la');
         setLoading(true);
         fetch("/session/shopping-cart")
             .then((response) => response.json())
@@ -46,24 +44,13 @@ export default function useShoppingCart() {
             .finally(() => {
                 setLoading(false);
             });
-
-        fetch("/session/addresses")
-            .then((response) => response.json())
-            .then((json) => setSessionAddresses(json))
-            .finally(() => {
-                setLoading(false);
-            });;
     }, []);
-
-    console.log('within shopping cart');
-    console.log(shoppingCart);
 
     return {
         addItemToShoppingCart,
         removeItemFromShoppingCart,
         shoppingCart,
         totalPrices,
-        sessionAddresses,
         loading,
     };
 }

@@ -5,7 +5,7 @@ import {
     List,
     ListItemText,
     Stack,
-    Button
+    Button,
 } from "@mui/material";
 import { FooterTitle, SubscribeTf } from "../../../styles/footer";
 import { Colors } from "../../../styles/theme";
@@ -17,6 +17,9 @@ import SendIcon from "@mui/icons-material/Send";
 export default function Footer2() {
     return (
         <Box
+            container
+            display="flex"
+            justifyContent="space-between"
             sx={{
                 background: Colors.shaft,
                 color: Colors.white,
@@ -24,85 +27,91 @@ export default function Footer2() {
                 pt: 12,
                 pb: 12,
                 fontSize: { xs: "12px", md: "14px" },
+                flexDirection: { xs: "column", md: "row" },
             }}
         >
-            <Grid container spacing={2} justifyContent="center" md={2}>
-                <Grid item md={6} lg={2}>
-                    <FooterTitle variant="body1">About us</FooterTitle>
-                    <Typography variant="caption2">
-                        LoremIpsum officia ea nostrud esse. Nisi dolor
-                        reprehenderit est consequat veniam sunt Lorem
-                        exercitation in nostrud. Qui anim sunt irure ex sint
-                        anim labore proident consequat mollit exercitation
-                        incididunt est laboris. Laboris occaecat consequat non
-                        in nisi deserunt officia Lorem nulla reprehenderit
-                        cupidatat adipisicing. Cupidatat ex labore in ut
-                        deserunt laborum in aute do velit ullamco. Reprehenderit
-                        velit tempor cillum Lorem esse proident pariatur
-                        cupidatat cupidatat nostrud ea officia.
-                    </Typography>
-                    <Box
-                        sx={{
-                            mt: 4,
-                            color: Colors.dove_gray,
-                        }}
-                    >
-                        <FacebookIcon sx={{ mr: 1 }} />
-                        <TwitterIcon sx={{ mr: 1 }} />
-                        <InstagramIcon />
-                    </Box>
-                </Grid>
-                <Grid item md={6} lg={2}>
-                    <FooterTitle variant="body1">information</FooterTitle>
-                    <List>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                About us
-                            </Typography>
-                        </ListItemText>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                Order Tracking
-                            </Typography>
-                        </ListItemText>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                Privary &amp; Policy
-                            </Typography>
-                        </ListItemText>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                Terms &amp; Conditions
-                            </Typography>
-                        </ListItemText>
-                    </List>
-                </Grid>
-                <Grid item md={6} lg={2}>
-                    <FooterTitle variant="body1">My account</FooterTitle>
-                    <List>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                Login
-                            </Typography>
-                        </ListItemText>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                My Cart
-                            </Typography>
-                        </ListItemText>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                My Account
-                            </Typography>
-                        </ListItemText>
-                        <ListItemText>
-                            <Typography lineHeight={2} variant="caption2">
-                                Wishlist
-                            </Typography>
-                        </ListItemText>
-                    </List>
-                </Grid>
-                <Grid item md={6} lg={4}>
+            <Box
+                item
+                sx={{
+                    marginTop: "20px",
+                }}
+            >
+                <FooterTitle variant="body1">About us</FooterTitle>
+                <Typography variant="caption2">
+                    LoremIpsum officia ea nostrud esse.
+                </Typography>
+                <Box
+                    sx={{
+                        mt: 4,
+                        color: Colors.dove_gray,
+                    }}
+                >
+                    <FacebookIcon sx={{ mr: 1 }} />
+                    <TwitterIcon sx={{ mr: 1 }} />
+                    <InstagramIcon />
+                </Box>
+            </Box>
+            <Box
+                item
+                sx={{
+                    marginTop: "20px",
+                }}
+            >
+                <FooterTitle variant="body1">information</FooterTitle>
+                <List>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            About us
+                        </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            Order Tracking
+                        </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            Privary &amp; Policy
+                        </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            Terms &amp; Conditions
+                        </Typography>
+                    </ListItemText>
+                </List>
+            </Box>
+            <Box
+                item
+                sx={{
+                    marginTop: "20px",
+                }}
+            >
+                <FooterTitle variant="body1">My account</FooterTitle>
+                <List>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            Login
+                        </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            My Cart
+                        </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            My Account
+                        </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                        <Typography lineHeight={2} variant="caption2">
+                            Wishlist
+                        </Typography>
+                    </ListItemText>
+                </List>
+            </Box>
+            {/* <Grid item md={6} lg={4}>
                     <FooterTitle variant="body1">newsletter</FooterTitle>
                     <Stack>
                         <SubscribeTf
@@ -120,8 +129,7 @@ export default function Footer2() {
                             Subscribe
                         </Button>
                     </Stack>
-                </Grid>
-            </Grid>
+                </Grid> */}
         </Box>
     );
 }

@@ -1,4 +1,10 @@
-import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import {
+    Button,
+    Link,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+} from "@mui/material";
 import { AppbarContainer, AppbarHeader, MyList } from "../../../styles/appbar";
 import SearchIcon from "@mui/icons-material/Search";
 import Actions from "./actions";
@@ -7,21 +13,28 @@ import useProductCategories from "../../hooks/useProductCategories";
 import { visit } from "../../../utils";
 
 export default function AppbarDesktop({ matches, shoppingCart }) {
-
     const { setShowSearchBox } = useUIContext();
     const categories = useProductCategories();
 
-    console.log(shoppingCart);
-
     return (
         <AppbarContainer>
-            <AppbarHeader>My Bags</AppbarHeader>
+            {/* <AppbarHeader>
+                <Link>
+                My Bags
+
+                </Button>
+            </AppbarHeader> */}
+            <Link href="/" fontFamily='"Montez", "cursive"' fontSize="4em" padding="4px" flexGrow="1" underline="none">
+                My Bags
+            </Link>
             <MyList type="row">
-                {categories.map((category) =>
-                    <ListItemButton onClick={() => visit(`/product/${category.id}`)}>
+                {categories.map((category) => (
+                    <ListItemButton
+                        onClick={() => visit(`/product/${category.id}`)}
+                    >
                         <ListItemText primary={category.name} />
                     </ListItemButton>
-                )}
+                ))}
                 <ListItemButton>
                     <ListItemIcon>
                         <SearchIcon onClick={() => setShowSearchBox(true)} />

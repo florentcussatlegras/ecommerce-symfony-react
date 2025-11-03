@@ -22,8 +22,6 @@ export default function Product({ categoryId }) {
     }, []);
 
     const { addItemToShoppingCart, shoppingCart } = useShoppingCart();
-    console.log('toto');
-    console.log(shoppingCart);
 
     const category = useProductCategories(categoryId);
 
