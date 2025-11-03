@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class OrderController extends AbstractController
 {
-    #[Route('api/order/list', name: 'api_order_list', methods: 'GET')]
+    #[Route('/api/order/list', name: 'api_order_list', methods: 'GET')]
     public function list(NormalizerInterface $normalizer, EntityManagerInterface $entityManager): Response
     {
         $userOrders = $entityManager->getRepository(UserOrder::class)->findBy(['user' => $this->getUser()]);
@@ -29,11 +29,11 @@ class OrderController extends AbstractController
         return $this->json($serializedUserOrders);
     }
 
-    #[Route('api/order/create', name: 'api_order_create', methods: 'GET')]
+    #[Route('/api/order/create', name: 'api_order_create', methods: 'GET')]
     public function create(NormalizerInterface $normalizer, SessionService $sessionService, SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
         $order = !$session->has('user_order') ? new UserOrder() : $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());
-
+       
         $order->setReference(0);
         $order->setUser($this->getUser());
         $order->setIsValid(0);
@@ -56,7 +56,7 @@ class OrderController extends AbstractController
         return new Response('OK');
     }
 
-    #[Route('api/order/validate', name: 'api_order_validate', methods: 'GET')]
+    #[Route('/api/order/validate', name: 'api_order_validate', methods: 'GET')]
     public function validate(SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
         $order = $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());

@@ -59,13 +59,13 @@ export default function Delivery() {
             });
 
         setLoading(true);
-        fetch("api/order/create")
+        fetch("/api/order/create")
             .then((response) => response.json())
             .finally(() => {
                 setLoading(false);
             });
 
-        visit('/order');
+        // visit('/order');
     };
 
     return (
