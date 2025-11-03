@@ -19,7 +19,7 @@ export default function Footer2() {
         <Box
             container
             display="flex"
-            justifyContent="space-between"
+            justifyContent="space-around"
             sx={{
                 background: Colors.shaft,
                 color: Colors.white,

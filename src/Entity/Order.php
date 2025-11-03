@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -19,21 +20,26 @@ class Order
     private ?bool $isValid;
 
     #[ORM\Column(nullable: true)]
+    #[Groups('order:read')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups('order:read')]
     private ?string $reference = null;
 
     #[ORM\Column(type: 'json', nullable: true)]
+    #[Groups('order:read')]
     private array $products = [];
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'orders', cascade:['persist'])]
     private $user;
 
     #[ORM\ManyToOne(targetEntity: UserAddress::class, inversedBy: 'orders', cascade:['persist'])]
+    #[Groups('order:read')]
     private $deliveryAddress;
 
     #[ORM\ManyToOne(targetEntity: UserAddress::class, inversedBy: 'orders', cascade:['persist'])]
+    #[Groups('order:read')]
     private $billingAddress;
 
     public function getId(): ?int

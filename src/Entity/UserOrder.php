@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 use App\Entity\UserAddress;
 use App\Repository\UserOrderRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserOrderRepository::class)]
 #[ORM\Table(name: 'user_order')]
@@ -17,18 +18,23 @@ class UserOrder
     private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups('order:read')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups('order:read')]
     private ?string $reference = null;
 
     #[ORM\Column(type: 'json', nullable: true)]
+    #[Groups('order:read')]
     private array $products = [];
 
     #[ORM\ManyToOne(targetEntity: UserAddress::class, inversedBy: 'tasks', cascade:['persist'])]
+    #[Groups('order:read')]
     private $deliveryAddress;
 
     #[ORM\ManyToOne(targetEntity: UserAddress::class, inversedBy: 'tasks', cascade:['persist'])]
+    #[Groups('order:read')]
     private $billingAddress;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasks', cascade:['persist'])]

@@ -6,16 +6,31 @@ use App\Entity\UserAddress;
 use App\Entity\UserOrder;
 use App\Service\SessionService;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
+use Normalizer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class OrderController extends AbstractController
 {
+    #[Route('api/order/list', name: 'api_order_list', methods: 'GET')]
+    public function list(NormalizerInterface $normalizer, EntityManagerInterface $entityManager): Response
+    {
+        $userOrders = $entityManager->getRepository(UserOrder::class)->findBy(['user' => $this->getUser()]);
+
+        $serializedUserOrders = $normalizer->normalize($userOrders, 'json', [
+            'groups' => 'order:read'
+        ]);
+
+        return $this->json($serializedUserOrders);
+    }
+
     #[Route('api/order/create', name: 'api_order_create', methods: 'GET')]
-    public function create(SessionService $sessionService, SessionInterface $session, EntityManagerInterface $entityManager): Response
+    public function create(NormalizerInterface $normalizer, SessionService $sessionService, SessionInterface $session, EntityManagerInterface $entityManager): Response
     {
         $order = !$session->has('user_order') ? new UserOrder() : $entityManager->getRepository(UserOrder::class)->findOneById($session->get('user_order')->getId());
 
@@ -24,7 +39,9 @@ class OrderController extends AbstractController
         $order->setIsValid(0);
         $addressDelivery = $entityManager->getRepository(UserAddress::class)->findOneById($session->get('address_delivery')->getId());
         $addressBilling = $entityManager->getRepository(UserAddress::class)->findOneById($session->get('address_billing')->getId());
-        $order->setProducts($sessionService->getShoppingCart()->items->toArray());
+
+        $normalizedProducts = $normalizer->normalize($sessionService->getShoppingCart()->items->toArray(), 'json');
+        $order->setProducts($normalizedProducts);
         $order->setDeliveryAddress($addressDelivery);
         $order->setBillingAddress($addressBilling);
         $order->setCreatedAt(new \DateTimeImmutable());
