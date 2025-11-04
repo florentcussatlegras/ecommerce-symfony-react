@@ -20,6 +20,8 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import useShoppingCart from "../../hooks/useShoppingCart";
+import { useEffect, useState } from "react";
+import { clamp } from "../ui/clamp";
 
 function SlideTransition(props) {
     return <Slide direction="down" {...props} />;
@@ -37,9 +39,32 @@ const ProductDetailInfoWrapper = styled(Box)(() => ({
     lineHeight: 1.5,
 }));
 
-export default function ProductDetail({ open, onClose, product, addItemToShoppingCart }) {
+export default function ProductDetail({
+    open,
+    onClose,
+    product,
+    addItemToShoppingCart,
+}) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+    const [value, setValue] = useState(1);
+    const clampV = clamp(1, 10);
+
+    function decreaseQuantity() {
+        setValue(clampV(value - 1));
+    }
+
+    function increaseQuantity() {
+        setValue(clampV(value + 1));
+    }
+
+    function addQuantitySelectedInShoppingCart() {
+        for (let i = 0; i < value; i++) {
+            addItemToShoppingCart(product);
+        }
+        onClose();
+    } 
 
     return (
         <Dialog
@@ -70,7 +95,12 @@ export default function ProductDetail({ open, onClose, product, addItemToShoppin
                 <ProductDetailWrapper
                     flexDirection={matches ? "column" : "row"}
                 >
-                    <Product sx={{ mr: 4, width: { xs: "100%", md: "60%", xl: "40%" } }}>
+                    <Product
+                        sx={{
+                            mr: 4,
+                            width: { xs: "100%", md: "60%", xl: "40%" },
+                        }}
+                    >
                         <img src={"/images/products/" + product.imageName} />
                     </Product>
                     <ProductDetailInfoWrapper>
@@ -81,7 +111,7 @@ export default function ProductDetail({ open, onClose, product, addItemToShoppin
                             {product.name}
                         </Typography>
                         <Typography variant="body">
-                            {product.description.replace(/<[^>]*>/g, '')}
+                            {product.description.replace(/<[^>]*>/g, "")}
                         </Typography>
                         <Box
                             sx={{ mt: 4 }}
@@ -90,10 +120,10 @@ export default function ProductDetail({ open, onClose, product, addItemToShoppin
                             justifyContent="space-between"
                             gap={2}
                         >
-                            <IncDec />
+                            <IncDec decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity} value={value} />
                             <Button
                                 variant="contained"
-                                onClick={() => addItemToShoppingCart(product)}
+                                onClick={addQuantitySelectedInShoppingCart}
                             >
                                 Ajouter au panier
                             </Button>
