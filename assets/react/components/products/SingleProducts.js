@@ -28,12 +28,12 @@ export default function SingleProducts({ product, matches, addItemToShoppingCart
                 <ProductMeta product={product} matches={matches} />
                 <ProductActionsWrapper>
                     <Stack direction="row">
-                        <ProductFavButton isFav={0}>
+                        {/* <ProductFavButton isFav={0}>
                             <FavoriteIcon />
                         </ProductFavButton>
                         <ProductActionButton>
                             <ShareIcon color="primary" />
-                        </ProductActionButton>
+                        </ProductActionButton> */}
                         <ProductActionButton
                             onClick={() => showProductDetailDialog()}
                         >
@@ -42,7 +42,7 @@ export default function SingleProducts({ product, matches, addItemToShoppingCart
                     </Stack>
                 </ProductActionsWrapper>
             </Product>
-            <ProductAddToCart variant="contained" onClick={() => addItemToShoppingCart(product)}>Add to cart</ProductAddToCart>
+            <ProductAddToCart variant="contained" onClick={() => addItemToShoppingCart(product)}>Ajouter au panier</ProductAddToCart>
             <ProductDetailDialog product={product} />
         </>
     );

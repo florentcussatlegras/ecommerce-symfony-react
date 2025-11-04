@@ -1,4 +1,5 @@
 import {
+    Box,
     Button,
     Link,
     ListItemButton,
@@ -11,6 +12,7 @@ import Actions from "./actions";
 import { useUIContext } from "../../context/ui";
 import useProductCategories from "../../hooks/useProductCategories";
 import { visit } from "../../../utils";
+import { Colors } from "../../../styles/theme";
 
 export default function AppbarDesktop({ matches, shoppingCart }) {
     const { setShowSearchBox } = useUIContext();
@@ -24,7 +26,14 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
 
                 </Button>
             </AppbarHeader> */}
-            <Link href="/" fontFamily='"Montez", "cursive"' fontSize="4em" padding="4px" flexGrow="1" underline="none">
+            <Link
+                href="/"
+                fontFamily='"Montez", "cursive"'
+                fontSize="4em"
+                padding="4px"
+                flexGrow="1"
+                underline="none"
+            >
                 My Bags
             </Link>
             <MyList type="row">
@@ -32,16 +41,30 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
                     <ListItemButton
                         onClick={() => visit(`/product/${category.id}`)}
                     >
-                        <ListItemText primary={category.name} />
+                        <ListItemText
+                            primary={category.name}
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                            }}
+                        />
                     </ListItemButton>
                 ))}
+
                 <ListItemButton>
-                    <ListItemIcon>
+                    <ListItemIcon
+                        sx={{
+                            display: "flex",
+                            justifyContent: "right",
+                            color: Colors.dim_gray,
+                            width: "50px",
+                        }}
+                    >
                         <SearchIcon onClick={() => setShowSearchBox(true)} />
                     </ListItemIcon>
                 </ListItemButton>
             </MyList>
-            <Actions matches={matches} shoppingCart={shoppingCart} />
+            <Actions shoppingCart={shoppingCart} />
         </AppbarContainer>
     );
 }

@@ -61,13 +61,13 @@ export default function Products({
                 container
                 spacing={{ xs: 2, md: 6 }}
                 justifyContent={"left"}
-                sx={{ margin: "10px 4px 10px 4px" }}
+                sx={{ margin: "10px 4px 40px 4px" }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
             >
                 {items != undefined && items.length > 0 ? (
                     renderProducts
                 ) : (
-                    <Typography variant="h5">Aucun produits trouvés</Typography>
+                    search == 1 && <Typography variant="h5" marginY={5}>Aucun produits trouvés</Typography>
                 )}
             </Grid>
         </>

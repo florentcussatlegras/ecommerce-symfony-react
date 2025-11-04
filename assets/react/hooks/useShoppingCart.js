@@ -27,6 +27,13 @@ export default function useShoppingCart() {
             .finally(() => {
                 setLoading(false);
             });
+
+        fetch("/session/shopping-cart/total-prices")
+            .then((response) => response.json())
+            .then((json) => setTotalPrices(json))
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     useEffect(() => {

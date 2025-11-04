@@ -54,9 +54,9 @@ export default function SingleProductDesktop({ product, matches, addItemToShoppi
                         {/* <ProductFavButton isFav={0}>
                             <FavoriteIcon />
                         </ProductFavButton> */}
-                        <ProductActionButton>
+                        {/* <ProductActionButton>
                             <ShareIcon color="primary" />
-                        </ProductActionButton>
+                        </ProductActionButton> */}
                         <ProductActionButton
                             onClick={() => showProductDetailDialog()}
                         >

@@ -13,9 +13,9 @@ export default function Appbar({shoppingCart}) {
     return (
         <>
             {matches ? (
-                <AppbarMobile matches={matches} shoppingCart={shoppingCart} />
+                <AppbarMobile shoppingCart={shoppingCart} />
             ) : (
-                <AppbarDesktop matches={matches} shoppingCart={shoppingCart} />
+                <AppbarDesktop shoppingCart={shoppingCart} />
             )}
         </>
     );

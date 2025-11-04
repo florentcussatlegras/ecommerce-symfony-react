@@ -24,8 +24,8 @@ export const AppbarHeader = styled(Typography)(() => ({
 
 export const MyList = styled(List)(({ type }) => ({
     display: type === 'row' ? 'flex' : 'block',
-    flexGrow: 3,
-    justifyContent: 'center',
+    flexGrow: 1,
+    justifyContent: 'right',
     alignItems: 'center' 
 }));
 

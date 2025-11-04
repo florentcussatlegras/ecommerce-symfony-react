@@ -14,6 +14,7 @@ import { lighten } from "polished";
 import { Colors } from "../../../styles/theme";
 import useProductCategories from "../../hooks/useProductCategories";
 import { useState } from "react";
+import { visit } from "../../../utils";
 
 const MiddleDivider = styled((props) => (
     <Divider variant="middle" {...props} />
@@ -40,7 +41,7 @@ export default function AppDrawer() {
             <Drawer open={drawerOpen}>
                 <List>
                     {categories.map((category) => (
-                        <ListItemButton>
+                        <ListItemButton onClick={() => visit(`/product/${category.id}`)}>
                             <ListItemText>{category.name}</ListItemText>
                         </ListItemButton>
                     ))}

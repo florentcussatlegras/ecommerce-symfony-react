@@ -10,47 +10,47 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Colors } from "../../../styles/theme";
 import { visit } from "../../../utils";
 
-export default function Actions({ matches, shoppingCart }) {
-
-    const Component = matches 
-        ? ActionIconsContainerMobile
-        : ActionIconsContainerDesktop;
-
+export default function Actions({ shoppingCart }) {
     const showShoppingCart = () => {
-        visit('/shopping-cart')
-    }
+        visit("/shopping-cart");
+    };
 
     const showProfile = () => {
-        visit('/profile')
-    }
+        visit("/profile");
+    };
 
     const calculateTotalQuantity = () => {
-        return shoppingCart?.items?.map((item) => item.quantity).reduce((a, b) => a + b, 0);
-    }
+        return shoppingCart?.items
+            ?.map((item) => item.quantity)
+            .reduce((a, b) => a + b, 0);
+    };
 
     return (
-        <Component>
-            <MyList type="row">
-                <ListItemButton
+        <MyList type="row">
+            <ListItemButton
+                sx={{
+                    justifyContent: "center",
+                    width: "50px"
+                }}
+            >
+                <ListItemIcon
                     sx={{
+                        display: "flex",
                         justifyContent: "center",
+                        color: Colors.dim_gray,
                     }}
+                    onClick={showShoppingCart}
                 >
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            color: matches && Colors.secondary,
-                        }}
-                        onClick={showShoppingCart}
+                    <Badge
+                        badgeContent={calculateTotalQuantity()}
+                        color="secondary"
                     >
-                        <Badge badgeContent={calculateTotalQuantity()} color="secondary">
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </ListItemIcon>
-                </ListItemButton>
-                {/* <Divider orientation="vertical" flexItem /> */}
-                {/* <ListItemButton
+                        <ShoppingCartIcon />
+                    </Badge>
+                </ListItemIcon>
+            </ListItemButton>
+            {/* <Divider orientation="vertical" flexItem /> */}
+            {/* <ListItemButton
                     sx={{
                         justifyContent: "center",
                     }}
@@ -66,23 +66,23 @@ export default function Actions({ matches, shoppingCart }) {
                     </ListItemIcon>
                 </ListItemButton>
                 <Divider orientation="vertical" flexItem /> */}
-                <ListItemButton
+            <ListItemButton
+                sx={{
+                    justifyContent: "center",
+                    width: "50px"
+                }}
+            >
+                <ListItemIcon
                     sx={{
+                        display: "flex",
                         justifyContent: "center",
+                        color: Colors.dim_gray,
                     }}
+                    onClick={showProfile}
                 >
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "center",
-                            color: matches && Colors.secondary,
-                        }}
-                        onClick={showProfile}
-                    >
-                        <PersonIcon />
-                    </ListItemIcon>
-                </ListItemButton>
-            </MyList>
-        </Component>
+                    <PersonIcon />
+                </ListItemIcon>
+            </ListItemButton>
+        </MyList>
     );
 }

@@ -142,9 +142,9 @@ export default function ProductDetail({
                                 color: Colors.light,
                             }}
                         >
-                            <FacebookIcon />
+                            {/* <FacebookIcon />
                             <TwitterIcon sx={{ pl: 2 }} />
-                            <InstagramIcon sx={{ pl: theme.spacing(4) }} />
+                            <InstagramIcon sx={{ pl: theme.spacing(4) }} /> */}
                         </Box>
                     </ProductDetailInfoWrapper>
                 </ProductDetailWrapper>
