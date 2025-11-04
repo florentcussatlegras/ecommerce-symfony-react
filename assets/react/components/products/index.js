@@ -5,16 +5,27 @@ import SingleProduct from "./SingleProducts";
 import SingleProductDesktop from "./SingleProductDesktop";
 
 export default function Products({
+    search,
     addItemToShoppingCart,
     shoppingCart,
     category,
+    products,
 }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-    const products = useProducts(category.id);
+    let items;
 
-    const renderProducts = products.map((product) => (
+    if (search == 0) {
+        items = useProducts(category.id);
+        console.log('mode pas search');
+    }else{
+        console.log('mode search');
+        // console.log(products);
+        items = JSON.parse(products);
+    };
+
+    const renderProducts = items.map((product) => (
         <Grid
             key={product.id}
             size={{ xs: 2, sm: 4, md: 4 }}
@@ -43,7 +54,11 @@ export default function Products({
     return (
         <>
             <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
-                <Typography variant="h4">{category.name}</Typography>
+                {category != undefined ? (
+                    <Typography variant="h4">{category.name}</Typography>
+                ) : (
+                    <Typography variant="h4">Résultats recherche</Typography>
+                )}
             </Box>
             <Grid
                 container
@@ -52,7 +67,11 @@ export default function Products({
                 sx={{ margin: "10px 4px 10px 4px" }}
                 columns={{ xs: 4, sm: 8, md: 12 }}
             >
-                {renderProducts}
+                {items != undefined && items.length > 0 ? (
+                    renderProducts
+                ) : (
+                    <Typography variant="h5">Aucun produits trouvés</Typography>
+                )}
             </Grid>
         </>
 

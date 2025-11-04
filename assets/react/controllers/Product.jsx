@@ -24,6 +24,8 @@ export default function Product({ categoryId }) {
     const { addItemToShoppingCart, shoppingCart } = useShoppingCart();
 
     const category = useProductCategories(categoryId);
+    console.log('ici');
+    console.log(category);
 
     return (
         // <Layout>
@@ -43,6 +45,7 @@ export default function Product({ categoryId }) {
                 <UIProvider>
                     <Appbar shoppingCart={shoppingCart} />
                     <Products
+                        search={0}
                         addItemToShoppingCart={addItemToShoppingCart}
                         shoppingCart={shoppingCart}
                         category={category}

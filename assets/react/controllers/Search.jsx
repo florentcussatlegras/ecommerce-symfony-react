@@ -16,13 +16,14 @@ import useShoppingCart from "../hooks/useShoppingCart";
 import useProductCategories from "../hooks/useProductCategories";
 import Layout from "./Layout";
 
-export default function Search({ categoryId }) {
+export default function Search() {
     useEffect(() => {
         document.title = "React Material UI - Home";
     }, []);
 
     const { addItemToShoppingCart, shoppingCart } = useShoppingCart();
-    console.log(localStorage.getItem('results_search'));
+    const products = localStorage.getItem("results_search");
+    console.log(products);
 
     return (
         <ThemeProvider theme={theme}>
@@ -34,14 +35,12 @@ export default function Search({ categoryId }) {
             >
                 <UIProvider>
                     <Appbar shoppingCart={shoppingCart} />
-                    {/* <Products
+                    <Products
+                        search={1}
                         addItemToShoppingCart={addItemToShoppingCart}
                         shoppingCart={shoppingCart}
-                        category={category}
-                    /> */}
-                        {/* {localStorage.getItem('results_search').map((product) => (
-                            product.name
-                        ))} */}
+                        products={products}
+                    /> 
                     <Footer />
                     <AppDrawer />
                     <SearchBox />

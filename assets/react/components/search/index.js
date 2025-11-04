@@ -35,8 +35,8 @@ export default function SearchBox() {
 
     const handleSubmit = () => {
         console.log(results);
-        // localStorage.setItem('results_search', results);
-        // visit('/search');
+        localStorage.setItem('results_search', JSON.stringify(results));
+        visit('/search');
     };
 
     return (

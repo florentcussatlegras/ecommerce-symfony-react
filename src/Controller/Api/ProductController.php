@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,7 +18,7 @@ class ProductController extends AbstractController
         $products = $productRepository->findAll();
 
         $serializedProducts = $normalizer->normalize($products, 'json', [
-            'groups' => 'product:read'
+            'groups' => 'product:search'
         ]);
 
         return $this->json($serializedProducts);
