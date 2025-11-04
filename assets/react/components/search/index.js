@@ -4,9 +4,40 @@ import { SearchBoxContainer, SearchField } from "../../../styles/search";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import { visit } from "../../../utils";
 
 export default function SearchBox() {
     const { showSearchBox, setShowSearchBox } = useUIContext();
+    const [input, setInput] = useState("");
+    const [results, setResults] = useState([]);
+
+    const fetchData = (value) => {
+        fetch("/api/products/list")
+            .then((response) => response.json())
+            .then((json) => {
+                const results = json.filter((product) => {
+                    return (
+                        value &&
+                        product &&
+                        product.name &&
+                        product.name.toLowerCase().includes(value)
+                    );
+                });
+                setResults(results);
+            });
+    };
+
+    const handleChange = (event) => {
+        const value = event.currentTarget.value;
+        setInput(value);
+        fetchData(value);
+    };
+
+    const handleSubmit = () => {
+        console.log(results);
+        // localStorage.setItem('results_search', results);
+        // visit('/search');
+    };
 
     return (
         <Slide direction="down" in={showSearchBox} timeout={500}>
@@ -16,8 +47,12 @@ export default function SearchBox() {
                     variant="standard"
                     fullWidth
                     placeholder="search..."
+                    value={input}
+                    onChange={handleChange}
                 />
-                <IconButton>
+                <IconButton
+                    onClick={handleSubmit}
+                >
                     <SearchIcon
                         sx={{
                             fontSize: { xs: "2rem", md: "3rem" },

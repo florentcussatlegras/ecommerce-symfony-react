@@ -10,9 +10,10 @@ import {
     TableContainer,
     TableHead,
     TableRow,
+    Divider,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
-import theme from "../../styles/theme";
+import theme, { Colors } from "../../styles/theme";
 import Appbar from "../components/appbar";
 import Footer from "../components/footer";
 import AppDrawer from "../components/drawer";
@@ -58,8 +59,13 @@ export default function Profile() {
                                 marginY={2}
                             >
                                 <Box display="flex" flexDirection="row" justifyContent="space-between" gap={2} fontSize="14px">
-                                    <span>Réf. {order.reference}</span>
-                                    <span>le {new Intl.DateTimeFormat('fr-FR', {
+                                    <Box display="flex" gap={4}>
+                                        <span>Réf. {order.reference}</span>
+                                        <span>
+                                            Total: 36 € TTC{" "}
+                                        </span>
+                                    </Box>
+                                    <span>{new Intl.DateTimeFormat('fr-FR', {
                                         dateStyle: "medium"
                                     }).format(new Date(order.createdAt))}</span>
                                 </Box>
@@ -117,13 +123,6 @@ export default function Profile() {
                                             </TableBody>
                                         </Table>
                                     </TableContainer>{" "}
-                                    <Box
-                                        marginY={5}
-                                        display={"flex"}
-                                        justifyContent={"right"}
-                                    >
-                                        Total: 36 € TTC{" "}
-                                    </Box>
                                 </Box>
                             </Box>
                         ))}

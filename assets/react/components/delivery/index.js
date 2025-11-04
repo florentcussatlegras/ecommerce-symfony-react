@@ -65,7 +65,7 @@ export default function Delivery() {
                 setLoading(false);
             });
 
-        // visit('/order');
+        visit('/order');
     };
 
     return (

@@ -11,8 +11,21 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class ProductController extends AbstractController
 {
-    #[Route('api/products/{id:category}', name: 'api_get_products', methods: 'GET')]
-    public function getProducts(ProductRepository $productRepository, NormalizerInterface $normalizer, ProductCategory $category): Response 
+    #[Route('/api/products/list', name: 'api_get_products_list', methods: 'GET')]
+    public function getAllProducts(ProductRepository $productRepository, NormalizerInterface $normalizer): Response 
+    {
+        $products = $productRepository->findAll();
+
+        $serializedProducts = $normalizer->normalize($products, 'json', [
+            'groups' => 'product:read'
+        ]);
+
+        return $this->json($serializedProducts);
+    }
+
+
+    #[Route('/api/products/{id:category}', name: 'api_get_products_by_category', methods: 'GET')]
+    public function getProductsByCategory(ProductRepository $productRepository, NormalizerInterface $normalizer, ProductCategory $category): Response 
     {
         $products = $productRepository->findBy([
             'category' => $category
