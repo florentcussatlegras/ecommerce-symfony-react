@@ -37,10 +37,9 @@ const ProductDetailInfoWrapper = styled(Box)(() => ({
     lineHeight: 1.5,
 }));
 
-export default function ProductDetail({ open, onClose, product }) {
+export default function ProductDetail({ open, onClose, product, addItemToShoppingCart }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
-    const { addItemToShoppingCart } = useShoppingCart();
 
     return (
         <Dialog
@@ -82,7 +81,7 @@ export default function ProductDetail({ open, onClose, product }) {
                             {product.name}
                         </Typography>
                         <Typography variant="body">
-                            {product.description}
+                            {product.description.replace(/<[^>]*>/g, '')}
                         </Typography>
                         <Box
                             sx={{ mt: 4 }}

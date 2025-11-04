@@ -65,7 +65,7 @@ export default function SingleProductDesktop({ product, matches, addItemToShoppi
                     </Stack> 
                 </ProductActionsWrapper>
             </Product>
-            <ProductDetailDialog product={product} />
+            <ProductDetailDialog product={product} addItemToShoppingCart={addItemToShoppingCart} />
         </>
     );
 }
