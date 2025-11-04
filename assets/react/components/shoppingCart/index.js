@@ -5,16 +5,9 @@ import { visit } from "../../../utils";
 export default function ShoppingCart({
     removeItemFromShoppingCart,
     shoppingCart,
-    totalPrices
+    totalPrices,
 }) {
-    const createCheckoutSession = () => {
-        fetch("/stripe/checkout-sessions", {
-            method: "POST",
-        })
-            .then(response => response.json())
-            .then(json => visit(json["url"]));
-    };
-
+    console.log(shoppingCart);
     return (
         <>
             <Box marginY={5}>
@@ -26,19 +19,30 @@ export default function ShoppingCart({
                     <Grid>
                         <Typography variant="h5">Mon panier</Typography>
                     </Grid>
-                    <Grid>
-                        {/* <Button variant="contained" color="primary" onClick={createCheckoutSession}> */}
-                        <Button variant="contained" color="primary" onClick={() => visit('/delivery')}>
-                            Valider mon panier
-                        </Button>
-                    </Grid>
+                    {shoppingCart.items != undefined && shoppingCart.items.length > 0 && (
+                        <Grid>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={() => visit("/delivery")}
+                            >
+                                Valider mon panier
+                            </Button>
+                        </Grid>
+                    )}
                 </Grid>
             </Box>
-            <ShoppingCartTable
-                removeItemFromShoppingCart={removeItemFromShoppingCart}
-                shoppingCart={shoppingCart}
-                totalPrices={totalPrices}
-            />
+            {shoppingCart.items != undefined && shoppingCart.items.length > 0 ? (
+                <ShoppingCartTable
+                    removeItemFromShoppingCart={removeItemFromShoppingCart}
+                    shoppingCart={shoppingCart}
+                    totalPrices={totalPrices}
+                />
+            ) : (
+                <Typography variant="h6" marginY={5}>
+                    Votre panier est vide
+                </Typography>
+            )}
         </>
     );
 }

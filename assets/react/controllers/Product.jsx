@@ -24,17 +24,8 @@ export default function Product({ categoryId }) {
     const { addItemToShoppingCart, shoppingCart } = useShoppingCart();
 
     const category = useProductCategories(categoryId);
-    console.log('ici');
-    console.log(category);
 
     return (
-        // <Layout>
-        //     <Products
-        //         addItemToShoppingCart={addItemToShoppingCart}
-        //         shoppingCart={shoppingCart}
-        //         category={category}
-        //     />
-        // </Layout>
         <ThemeProvider theme={theme}>
             <Container
                 maxWidth="xl"

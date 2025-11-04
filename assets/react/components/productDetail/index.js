@@ -19,6 +19,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import useShoppingCart from "../../hooks/useShoppingCart";
 
 function SlideTransition(props) {
     return <Slide direction="down" {...props} />;
@@ -39,6 +40,7 @@ const ProductDetailInfoWrapper = styled(Box)(() => ({
 export default function ProductDetail({ open, onClose, product }) {
     const theme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.down("md"));
+    const { addItemToShoppingCart } = useShoppingCart();
 
     return (
         <Dialog
@@ -59,7 +61,7 @@ export default function ProductDetail({ open, onClose, product }) {
                     alignItems="center"
                     justifyContent={"space-between"}
                 >
-                    Product title
+                    {product.name}
                     <IconButton onClick={onClose}>
                         <CloseIcon />
                     </IconButton>
@@ -69,15 +71,12 @@ export default function ProductDetail({ open, onClose, product }) {
                 <ProductDetailWrapper
                     flexDirection={matches ? "column" : "row"}
                 >
-                    <Product sx={{ mr: 4 }}>
-                        <ProductImage
-                            src={"/images/products/" + product.imageName}
-                        />
+                    <Product sx={{ mr: 4, width: { xs: "100%", md: "60%", xl: "40%" } }}>
+                        <img src={"/images/products/" + product.imageName} />
                     </Product>
                     <ProductDetailInfoWrapper>
-                        <Typography variant="subtitle1">SKU 123</Typography>
                         <Typography variant="subtitle1">
-                            Availability: 5 in stock
+                            SKU {product.reference}
                         </Typography>
                         <Typography sx={{ lineHeight: 2 }} variant="h4">
                             {product.name}
@@ -90,18 +89,24 @@ export default function ProductDetail({ open, onClose, product }) {
                             display="flex"
                             alignItems="center"
                             justifyContent="space-between"
+                            gap={2}
                         >
                             <IncDec />
-                            <Button variant="contained">Add to cart</Button>
+                            <Button
+                                variant="contained"
+                                onClick={() => addItemToShoppingCart(product)}
+                            >
+                                Ajouter au panier
+                            </Button>
                         </Box>
-                        <Box
+                        {/* <Box
                             display="flex"
                             alignItems="center"
                             sx={{ mt: 4, color: Colors.light }}
                         >
                             <FavoriteIcon sx={{ mr: 2 }} />
                             Add to wishlist
-                        </Box>
+                        </Box> */}
                         <Box
                             sx={{
                                 mt: 4,

@@ -18,10 +18,7 @@ export default function Products({
 
     if (search == 0) {
         items = useProducts(category.id);
-        console.log('mode pas search');
     }else{
-        console.log('mode search');
-        // console.log(products);
         items = JSON.parse(products);
     };
 

@@ -22,7 +22,7 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups('product:read')]
+    #[Groups(['product:read', 'product:search'])]
     private ?string $reference = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -52,7 +52,7 @@ class Product
     private ?bool $active = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups('product:read')]
+    #[Groups(['product:read', 'product:search'])]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
