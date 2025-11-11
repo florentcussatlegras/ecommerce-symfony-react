@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "42bebef88d35f1baa34b62e282d78b79",
+    "content-hash": "99876aadb263549845ee92249f5a311d",
     "packages": [
         {
             "name": "composer/semver",
@@ -7214,16 +7214,16 @@
         },
         {
             "name": "symfony/ux-react",
-            "version": "v2.30.0",
+            "version": "v2.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-react.git",
-                "reference": "29ed56b43bc5f3176f390f5193b3363627ac960c"
+                "reference": "57d3a160e7275d648a8d7cd39aef9d6e9e375f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-react/zipball/29ed56b43bc5f3176f390f5193b3363627ac960c",
-                "reference": "29ed56b43bc5f3176f390f5193b3363627ac960c",
+                "url": "https://api.github.com/repos/symfony/ux-react/zipball/57d3a160e7275d648a8d7cd39aef9d6e9e375f82",
+                "reference": "57d3a160e7275d648a8d7cd39aef9d6e9e375f82",
                 "shasum": ""
             },
             "require": {
@@ -7270,7 +7270,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-react/tree/v2.30.0"
+                "source": "https://github.com/symfony/ux-react/tree/v2.31.0"
             },
             "funding": [
                 {
@@ -7290,7 +7290,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-08-27T15:25:48+00:00"
+            "time": "2025-10-16T07:24:06+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
