@@ -74,4 +74,19 @@ class SessionService
     {
         return $this->requestStack->getSession();
     }
+
+    public function getTotalPrice(): ?int
+    {
+        $totalPrices = 0;
+
+        foreach ($this->getShoppingCart()->items as $item) {
+            // $lineItems[] = [
+            //     'price' => $item->product->getStripePriceId(),
+            //     'quantity' => $item->quantity
+            // ];
+            $totalPrices += $item->quantity * $item->product->getPrice();
+        }
+
+        return $totalPrices;
+    }
 }

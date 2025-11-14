@@ -51,81 +51,108 @@ export default function Profile() {
                     </Box>
                     <Box marginBottom={5} display="flex" flexDirection="column">
                         <Typography variant="h5">Mes commandes</Typography>
-                        {orders.map((order) => (
-                            <Box
-                                display="flex"
-                                flexDirection="column"
-                                gap={2}
-                                marginY={2}
-                            >
-                                <Box display="flex" flexDirection="row" justifyContent="space-between" gap={2} fontSize="14px">
-                                    <Box display="flex" gap={4}>
-                                        <span>Réf. {order.reference}</span>
-                                        <span>
-                                            Total: 36 € TTC{" "}
-                                        </span>
-                                    </Box>
-                                    <span>{new Intl.DateTimeFormat('fr-FR', {
-                                        dateStyle: "medium"
-                                    }).format(new Date(order.createdAt))}</span>
-                                </Box>
+                        {orders.length > 0 ? (
+                            orders.map((order) => (
                                 <Box
                                     display="flex"
                                     flexDirection="column"
                                     gap={2}
+                                    marginY={2}
                                 >
-                                    <TableContainer>
-                                        <Table>
-                                            <TableBody>
-                                                {order.products.map((item) => (
-                                                    <TableRow
-                                                        key={item.product.id}
-                                                    >
-                                                        <TableCell>
-                                                            <Box
-                                                                display="flex"
-                                                                flexDirection="row"
-                                                                alignItems="center"
-                                                                gap={2}
-                                                            >
-                                                                <img
-                                                                    width={100}
-                                                                    height={100}
-                                                                    src={
-                                                                        "/images/products/" +
-                                                                        item
-                                                                            .product
-                                                                            .imageName
-                                                                    }
-                                                                    lat={
-                                                                        item
-                                                                            .product
-                                                                            .name
-                                                                    }
-                                                                />{" "}
-                                                                {
+                                    <Box
+                                        display="flex"
+                                        flexDirection="row"
+                                        justifyContent="space-between"
+                                        gap={2}
+                                        fontSize="14px"
+                                    >
+                                        <Box display="flex" gap={4}>
+                                            <span>Réf. {order.reference}</span>
+                                            <span>Total: {order.totalPrice / 100} € TTC </span>
+                                        </Box>
+                                        <span>
+                                            {new Intl.DateTimeFormat("fr-FR", {
+                                                dateStyle: "medium",
+                                            }).format(
+                                                new Date(order.createdAt)
+                                            )}
+                                        </span>
+                                    </Box>
+                                    <Box
+                                        display="flex"
+                                        flexDirection="column"
+                                        gap={2}
+                                    >
+                                        <TableContainer>
+                                            <Table>
+                                                <TableBody>
+                                                    {order.products.map(
+                                                        (item) => (
+                                                            <TableRow
+                                                                key={
                                                                     item.product
-                                                                        .name
+                                                                        .id
                                                                 }
-                                                            </Box>
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {item.quantity}
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            {item.product
-                                                                .price /
-                                                                100}{" "}
-                                                            €
-                                                        </TableCell>
-                                                    </TableRow>
-                                                ))}
-                                            </TableBody>
-                                        </Table>
-                                    </TableContainer>{" "}
+                                                            >
+                                                                <TableCell>
+                                                                    <Box
+                                                                        display="flex"
+                                                                        flexDirection="row"
+                                                                        alignItems="center"
+                                                                        gap={2}
+                                                                    >
+                                                                        <img
+                                                                            width={
+                                                                                100
+                                                                            }
+                                                                            height={
+                                                                                100
+                                                                            }
+                                                                            src={
+                                                                                "/images/products/" +
+                                                                                item
+                                                                                    .product
+                                                                                    .imageName
+                                                                            }
+                                                                            lat={
+                                                                                item
+                                                                                    .product
+                                                                                    .name
+                                                                            }
+                                                                        />{" "}
+                                                                        {
+                                                                            item
+                                                                                .product
+                                                                                .name
+                                                                        }
+                                                                    </Box>
+                                                                </TableCell>
+                                                                <TableCell>
+                                                                    {
+                                                                        item.quantity
+                                                                    }
+                                                                </TableCell>
+                                                                <TableCell>
+                                                                    {item
+                                                                        .product
+                                                                        .price /
+                                                                        100}{" "}
+                                                                    €
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        )
+                                                    )}
+                                                </TableBody>
+                                            </Table>
+                                        </TableContainer>{" "}
+                                    </Box>
                                 </Box>
-                            </Box>
-                        ))}
+                            ))
+                        ) : (
+                            <Typography variant="h6" marginY={5}>
+                                Vous n'avez aucune commande
+                            </Typography>
+                        )}
                     </Box>
                     <Footer />
                     <AppDrawer />

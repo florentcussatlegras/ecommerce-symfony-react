@@ -7,7 +7,7 @@ export default function ShoppingCart({
     shoppingCart,
     totalPrices,
 }) {
-    console.log(shoppingCart);
+
     return (
         <>
             <Box marginY={5}>
@@ -16,9 +16,6 @@ export default function ShoppingCart({
                     justifyContent="space-between"
                     alignItems="center"
                 >
-                    <Grid>
-                        <Typography variant="h5">Mon panier</Typography>
-                    </Grid>
                     {shoppingCart.items != undefined && shoppingCart.items.length > 0 && (
                         <Grid>
                             <Button
@@ -39,7 +36,7 @@ export default function ShoppingCart({
                     totalPrices={totalPrices}
                 />
             ) : (
-                <Typography variant="h6" marginY={5}>
+                <Typography variant="h6" marginTop={10} marginBottom={40}>
                     Votre panier est vide
                 </Typography>
             )}

@@ -15,7 +15,8 @@ import useShoppingCart from "../hooks/useShoppingCart";
 import ShoppingCart from "../components/shoppingCart";
 
 export default function ShoppingCartIndex() {
-    const { removeItemFromShoppingCart, shoppingCart, totalPrices } = useShoppingCart();
+    const { removeItemFromShoppingCart, shoppingCart, totalPrices } =
+        useShoppingCart();
 
     return (
         <ThemeProvider theme={theme}>
@@ -27,6 +28,9 @@ export default function ShoppingCartIndex() {
             >
                 <UIProvider>
                     <Appbar shoppingCart={shoppingCart} />
+                    <Box display="flex" justifyContent={"center"} sx={{ p: 4 }}>
+                        <Typography variant="h4">Mon panier</Typography>
+                    </Box>
                     <ShoppingCart
                         removeItemFromShoppingCart={removeItemFromShoppingCart}
                         shoppingCart={shoppingCart}

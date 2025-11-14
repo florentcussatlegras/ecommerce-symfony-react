@@ -28,8 +28,16 @@ class RegistrationType extends AbstractType
             //         'empty_data' => '',
             //     ]
             // )
-            ->add('email', EmailType::class, [
+            ->add(
+                'email',
+                EmailType::class,
+                [
                     'label' => 'Votre adresse email',
+                    'constraints' => [
+                        new Assert\NotBlank([
+                            'message' => 'Veuillez saisir un email',
+                        ])
+                    ]
                 ]
             )
             ->add('plainPassword', PasswordType::class, [
@@ -50,7 +58,10 @@ class RegistrationType extends AbstractType
                     ])
                 ],
             ])
-            ->add('terms', CheckboxType::class, [
+            ->add(
+                'terms',
+                CheckboxType::class,
+                [
                     'label' => 'J\'ai lu et j\'accepte les conditions générales d\'utilisation et la politique de protection des données personnelles',
                     'mapped' => false,
                     'label_attr' => [
@@ -60,7 +71,8 @@ class RegistrationType extends AbstractType
                         'class' => 'mt-1 mr-2 w-5 h-5 cursor-pointer border border-gray-200'
                     ],
                     'constraints' => [
-                        new Assert\IsTrue([
+                        new Assert\IsTrue(
+                            [
                                 'message' => 'Pour continuer vous devez accepter nos conditions',
                             ]
                         )
@@ -75,7 +87,7 @@ class RegistrationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-                 'data_class' => User::class,
+            'data_class' => User::class,
         ]);
     }
 
@@ -86,5 +98,4 @@ class RegistrationType extends AbstractType
     {
         return 'user_registration';
     }
-
 }

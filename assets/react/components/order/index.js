@@ -183,7 +183,7 @@ export default function Order() {
                                 width: { xs: "75%", md: "50%" },
                             }}
                         >
-                            Modidier les adresses
+                            Modifier les adresses
                         </Button>
                     </Stack>
                 </Box>

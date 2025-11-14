@@ -36,7 +36,10 @@ class OrderController extends AbstractController
        
         $order->setReference(0);
         $order->setUser($this->getUser());
-        $order->setIsValid(0);
+
+        $totalPrice = $sessionService->getTotalPrice();
+        $order->setTotalPrice($totalPrice);
+
         $addressDelivery = $entityManager->getRepository(UserAddress::class)->findOneById($session->get('address_delivery')->getId());
         $addressBilling = $entityManager->getRepository(UserAddress::class)->findOneById($session->get('address_billing')->getId());
 

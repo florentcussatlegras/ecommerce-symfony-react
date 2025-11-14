@@ -62,7 +62,7 @@ class StripeService
             'currency' => 'EUR',
             'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => 'https://127.0.0.1:8000/stripe/success?session_id={CHECKOUT_SESSION_ID}'
+            'success_url' => 'https://fc-bags-shop.com/stripe/success?session_id={CHECKOUT_SESSION_ID}'
         ]);
     }
 

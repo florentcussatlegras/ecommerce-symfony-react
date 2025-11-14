@@ -27,6 +27,10 @@ class Order
     #[Groups('order:read')]
     private ?string $reference = null;
 
+    #[ORM\Column(length: 180)]
+    #[Groups('order:read')]
+    private ?string $totalPrices = null;
+
     #[ORM\Column(type: 'json', nullable: true)]
     #[Groups('order:read')]
     private array $products = [];

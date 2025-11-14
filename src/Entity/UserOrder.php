@@ -37,6 +37,10 @@ class UserOrder
     #[Groups('order:read')]
     private $billingAddress;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups('order:read')]
+    private ?int $totalPrice = null;
+
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasks', cascade:['persist'])]
     private $user;
 
@@ -128,6 +132,18 @@ class UserOrder
     public function setProducts(?array $products): static
     {
         $this->products = $products;
+
+        return $this;
+    }
+
+    public function getTotalPrice(): ?int
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(?int $totalPrice): static
+    {
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
