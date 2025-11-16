@@ -28,15 +28,26 @@ export default function Actions({ shoppingCart }) {
     return (
         <MyList type="row">
             <ListItemButton
+                disableRipple
+                disableTouchRipple
                 sx={{
-                    justifyContent: "center",
-                    width: "50px"
+                    display: "flex",
+                    justifyContent: "right",
+                    width: "20px",
+                    minWidth: "20px",
+                    padding: 0,
+                    "&:hover": {
+                        backgroundColor: "transparent",
+                    },
+                    "&:active": {
+                        backgroundColor: "transparent",
+                    },
                 }}
             >
                 <ListItemIcon
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
+                        justifyContent: "right",
                         color: Colors.dim_gray,
                     }}
                     onClick={showShoppingCart}
@@ -67,15 +78,26 @@ export default function Actions({ shoppingCart }) {
                 </ListItemButton>
                 <Divider orientation="vertical" flexItem /> */}
             <ListItemButton
+                disableRipple
+                disableTouchRipple
                 sx={{
-                    justifyContent: "center",
-                    width: "50px"
+                    display: "flex",
+                    justifyContent: "right",
+                    width: "20px",
+                    minWidth: "20px",
+                    padding: 0,
+                    "&:hover": {
+                        backgroundColor: "transparent",
+                    },
+                    "&:active": {
+                        backgroundColor: "transparent",
+                    },
                 }}
             >
                 <ListItemIcon
                     sx={{
                         display: "flex",
-                        justifyContent: "center",
+                        justifyContent: "right",
                         color: Colors.dim_gray,
                     }}
                     onClick={showProfile}

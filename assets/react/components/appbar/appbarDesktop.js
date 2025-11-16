@@ -36,35 +36,70 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
             >
                 My Bags
             </Link>
-            <MyList type="row">
-                {categories.map((category) => (
-                    <ListItemButton
-                        onClick={() => visit(`/product/${category.id}`)}
-                    >
-                        <ListItemText
-                            primary={category.name}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                            }}
-                        />
-                    </ListItemButton>
-                ))}
 
-                <ListItemButton>
+            {categories.map((category) => (
+                <ListItemButton
+                    onClick={() => visit(`/product/${category.id}`)}
+                    sx={{
+                        width: "60px",
+                    }}
+                >
+                    <ListItemText
+                        primary={category.name}
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                        }}
+                    />
+                </ListItemButton>
+            ))}
+
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "right",
+                    flexGrow: 0,
+                    alignItems: "center",
+                    width: "30%", // 👈 moitié de la largeur totale
+                    gap: 1,
+                }}
+            >
+                <ListItemButton
+                    disableRipple
+                    disableTouchRipple
+                    sx={{
+                        width: "20px",
+                        minWidth: "20px",
+                        padding: 0,
+                        "&.MuiListItemButton-root": {
+                            minWidth: "20px !important",
+                            paddingLeft: 0,
+                            paddingRight: 0,
+                        },
+                        "& .MuiListItemIcon-root": {
+                            minWidth: "20px !important",
+                        },
+                        "&:hover": {
+                            backgroundColor: "transparent",
+                        },
+                    }}
+                >
                     <ListItemIcon
                         sx={{
                             display: "flex",
                             justifyContent: "right",
                             color: Colors.dim_gray,
-                            width: "50px",
+                            width: "20px",
+                            minWidth: "20px",
+                            padding: 0,
                         }}
                     >
                         <SearchIcon onClick={() => setShowSearchBox(true)} />
                     </ListItemIcon>
                 </ListItemButton>
-            </MyList>
-            <Actions shoppingCart={shoppingCart} />
+
+                <Actions shoppingCart={shoppingCart} />
+            </Box>
         </AppbarContainer>
     );
 }
