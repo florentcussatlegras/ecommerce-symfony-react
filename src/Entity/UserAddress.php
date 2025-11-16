@@ -28,12 +28,6 @@ class UserAddress
     private ?string $address = null;
 
     #[ORM\Column(length: 180)]
-    private ?string $zipcode = null;
-
-    #[ORM\Column(length: 180)]
-    private ?string $city = null;
-
-    #[ORM\Column(length: 180)]
     private ?string $country = null;
 
     #[ORM\Column(length: 180)]
@@ -91,30 +85,6 @@ class UserAddress
     public function setAddress(string $address): static
     {
         $this->address = $address;
-
-        return $this;
-    }
-
-    public function getZipcode(): ?string
-    {
-        return $this->zipcode;
-    }
-
-    public function setZipcode(string $zipcode): static
-    {
-        $this->zipcode = $zipcode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): static
-    {
-        $this->city = $city;
 
         return $this;
     }

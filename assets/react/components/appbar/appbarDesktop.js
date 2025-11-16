@@ -1,14 +1,16 @@
 import {
     Box,
-    Button,
+    Badge,
     Link,
     ListItemButton,
     ListItemIcon,
     ListItemText,
-    IconButton
+    IconButton,
 } from "@mui/material";
 import { AppbarContainer, AppbarHeader, MyList } from "../../../styles/appbar";
 import SearchIcon from "@mui/icons-material/Search";
+import PersonIcon from "@mui/icons-material/Person";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Actions from "./actions";
 import { useUIContext } from "../../context/ui";
 import useProductCategories from "../../hooks/useProductCategories";
@@ -18,6 +20,20 @@ import { Colors } from "../../../styles/theme";
 export default function AppbarDesktop({ matches, shoppingCart }) {
     const { setShowSearchBox } = useUIContext();
     const categories = useProductCategories();
+
+    const showShoppingCart = () => {
+        visit("/shopping-cart");
+    };
+
+    const showProfile = () => {
+        visit("/profile");
+    };
+
+    const calculateTotalQuantity = () => {
+        return shoppingCart?.items
+            ?.map((item) => item.quantity)
+            .reduce((a, b) => a + b, 0);
+    };
 
     return (
         <AppbarContainer>
@@ -34,26 +50,42 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
                 padding="4px"
                 flexGrow="1"
                 underline="none"
+                sx={{
+                    width: { sm: "25%", lg: "20%", xl: "15%" }
+                }}
             >
                 My Bags
             </Link>
 
-            {categories.map((category) => (
-                <ListItemButton
-                    onClick={() => visit(`/product/${category.id}`)}
-                    sx={{
-                        width: "60px",
-                    }}
-                >
-                    <ListItemText
-                        primary={category.name}
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexGrow: 1,
+                    alignItems: "center",
+                    width: "10%", // ajustable
+                    gap: 1,
+                    width: { sm: "75%", lg: "80%", xl: "85%" },
+                    marginX: "30px",
+                }}
+            >
+                {categories.map((category) => (
+                    <ListItemButton
+                        onClick={() => visit(`/product/${category.id}`)}
                         sx={{
-                            display: "flex",
-                            justifyContent: "center",
+                            width: "60px",
                         }}
-                    />
-                </ListItemButton>
-            ))}
+                    >
+                        <ListItemText
+                            primary={category.name}
+                            sx={{
+                                display: "flex",
+                                justifyContent: "center",
+                            }}
+                        />
+                    </ListItemButton>
+                ))}
+            </Box>
 
             <Box
                 sx={{
@@ -78,14 +110,75 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
                         alignItems: "center",
                         justifyContent: "center",
                         "&:hover": { backgroundColor: "transparent" },
-                        "&.Mui-focusVisible": { backgroundColor: "transparent" },
+                        "&.Mui-focusVisible": {
+                            backgroundColor: "transparent",
+                        },
                     }}
                 >
                     <SearchIcon sx={{ color: Colors.dim_gray }} />
                 </IconButton>
 
-                {/* Actions (panier + profil) */}
-                <Actions shoppingCart={shoppingCart} />
+                <ListItemButton
+                    disableRipple
+                    disableTouchRipple
+                    sx={{
+                        display: "flex",
+                        justifyContent: "right",
+                        width: "20px",
+                        minWidth: "20px",
+                        padding: 0,
+                        "&:hover": {
+                            backgroundColor: "transparent",
+                        },
+                        "&:active": {
+                            backgroundColor: "transparent",
+                        },
+                    }}
+                >
+                    <ListItemIcon
+                        sx={{
+                            display: "flex",
+                            justifyContent: "right",
+                            color: Colors.dim_gray,
+                        }}
+                        onClick={showShoppingCart}
+                    >
+                        <Badge
+                            badgeContent={calculateTotalQuantity()}
+                            color="secondary"
+                        >
+                            <ShoppingCartIcon />
+                        </Badge>
+                    </ListItemIcon>
+                </ListItemButton>
+                <ListItemButton
+                    disableRipple
+                    disableTouchRipple
+                    sx={{
+                        display: "flex",
+                        justifyContent: "right",
+                        width: "20px",
+                        minWidth: "20px",
+                        padding: 0,
+                        "&:hover": {
+                            backgroundColor: "transparent",
+                        },
+                        "&:active": {
+                            backgroundColor: "transparent",
+                        },
+                    }}
+                >
+                    <ListItemIcon
+                        sx={{
+                            display: "flex",
+                            justifyContent: "right",
+                            color: Colors.dim_gray,
+                        }}
+                        onClick={showProfile}
+                    >
+                        <PersonIcon />
+                    </ListItemIcon>
+                </ListItemButton>
             </Box>
         </AppbarContainer>
     );

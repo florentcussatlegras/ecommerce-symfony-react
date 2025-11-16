@@ -3,37 +3,35 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { visit } from "../../../utils";
-
 import { z } from "zod";
+import AddressAutocomplete from "./AddressAutocomplete";
 
 const NewAddressFormSchema = z.object({
     firstname: z.string().min(2),
     lastname: z.string().min(2),
-    address: z.string().min(3).max(50),
+    address: z.string().min(3).max(200),
     phoneNumber: z
         .string()
         .regex(
             /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/,
             "Invalid phone number"
         ),
-    zipCode: z.string().regex(/^\d{5}$/, "Invalid postal code"),
-    city: z.string().min(2),
     country: z.string().min(2),
 });
 
-export default function NewAddress() {
+export default function NewAddress2() {
     const [formData, setFormData] = useState({
         firstname: "",
         lastname: "",
         address: "",
         phoneNumber: "",
-        zipCode: "",
-        city: "",
         country: "",
         complement: "",
     });
 
     const [errors, setErrors] = useState([]);
+
+    const [suggestions, setSuggestions] = useState([]);
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -59,7 +57,7 @@ export default function NewAddress() {
                 .then((response) => response.json())
                 .then((json) => console.log(json))
                 .finally(() => {
-                    visit('/delivery');
+                    visit("/delivery");
                 });
         }
     };
@@ -105,7 +103,7 @@ export default function NewAddress() {
                 helperText={errors.firstname}
             />
 
-            <TextField
+            {/* <TextField
                 error={errors.address}
                 id="address"
                 label="Adresse"
@@ -114,7 +112,14 @@ export default function NewAddress() {
                 value={formData.address}
                 onChange={handleChange}
                 helperText={errors.address}
+            /> */}
+
+            <AddressAutocomplete
+                formData={formData}
+                setFormData={setFormData}
+                errors={errors}
             />
+
             <TextField
                 error={errors.phoneNumber}
                 id="phoneNumber"
@@ -124,27 +129,6 @@ export default function NewAddress() {
                 value={formData.phoneNumner}
                 onChange={handleChange}
                 helperText={errors.phoneNumber}
-            />
-
-            <TextField
-                error={errors.zipCode}
-                id="zipCode"
-                label="Code postal"
-                name="zipCode"
-                variant="outlined"
-                value={formData.zipCode}
-                onChange={handleChange}
-                helperText={errors.zipCode}
-            />
-            <TextField
-                error={errors.city}
-                id="city"
-                label="Ville"
-                name="city"
-                variant="outlined"
-                value={formData.city}
-                onChange={handleChange}
-                helperText={errors.city}
             />
 
             <TextField

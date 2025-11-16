@@ -97,7 +97,7 @@ export default function Delivery() {
                                                 name="address_delivery"
                                                 value={address.id}
                                                 control={<Radio />}
-                                                label={`${address.address} ${address.zipcode} ${address.city}`}
+                                                label={`${address.address}`}
                                                 onClick={handleSelect}
                                             />
                                         ))}
@@ -118,7 +118,7 @@ export default function Delivery() {
                                                 name="address_billing"
                                                 value={address.id}
                                                 control={<Radio />}
-                                                label={`${address.address} ${address.zipcode} ${address.city}`}
+                                                label={`${address.address}`}
                                                 onClick={handleSelect}
                                             />
                                         ))}

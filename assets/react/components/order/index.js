@@ -131,6 +131,7 @@ export default function Order() {
                                                     .firstname
                                             }
                                         </span>
+                                        {" "}
                                         <span>
                                             {
                                                 addresses.address_delivery
@@ -161,6 +162,7 @@ export default function Order() {
                                                     .firstname
                                             }
                                         </span>
+                                        {" "}
                                         <span>
                                             {addresses.address_billing.lastname}
                                         </span>
