@@ -34,7 +34,6 @@ export default function SearchBox() {
     };
 
     const handleSubmit = () => {
-        console.log(results);
         localStorage.setItem('results_search', JSON.stringify(results));
         visit('/search');
     };

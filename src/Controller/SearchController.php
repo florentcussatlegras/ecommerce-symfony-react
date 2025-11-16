@@ -10,11 +10,7 @@ final class SearchController extends AbstractController
 {
     #[Route('/search', name: 'app_search')]
     public function index(): Response
-    {
-        if ($this->denyAccessUnlessGranted('IS_AUTHENTICATED')) {
-            return $this->redirectToRoute('app_login');
-        }
-        
+    {        
         return $this->render('search/index.html.twig');
     }
 }

@@ -22,6 +22,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import useShoppingCart from "../../hooks/useShoppingCart";
 import { useEffect, useState } from "react";
 import { clamp } from "../ui/clamp";
+import { formatPrice } from "../../../utils";
 
 function SlideTransition(props) {
     return <Slide direction="down" {...props} />;
@@ -64,7 +65,7 @@ export default function ProductDetail({
             addItemToShoppingCart(product);
         }
         onClose();
-    } 
+    }
 
     return (
         <Dialog
@@ -120,7 +121,11 @@ export default function ProductDetail({
                             justifyContent="space-between"
                             gap={2}
                         >
-                            <IncDec decreaseQuantity={decreaseQuantity} increaseQuantity={increaseQuantity} value={value} />
+                            <IncDec
+                                decreaseQuantity={decreaseQuantity}
+                                increaseQuantity={increaseQuantity}
+                                value={value}
+                            />
                             <Button
                                 variant="contained"
                                 onClick={addQuantitySelectedInShoppingCart}
@@ -128,14 +133,13 @@ export default function ProductDetail({
                                 Ajouter au panier
                             </Button>
                         </Box>
-                        {/* <Box
+                        <Box
                             display="flex"
                             alignItems="center"
-                            sx={{ mt: 4, color: Colors.light }}
+                            sx={{ mt: 4 }}
                         >
-                            <FavoriteIcon sx={{ mr: 2 }} />
-                            Add to wishlist
-                        </Box> */}
+                            {formatPrice(product.price)} TTC
+                        </Box>
                         <Box
                             sx={{
                                 mt: 4,

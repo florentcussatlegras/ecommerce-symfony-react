@@ -17,10 +17,6 @@ import useProductCategories from "../hooks/useProductCategories";
 import Layout from "./Layout";
 
 export default function Product({ categoryId }) {
-    useEffect(() => {
-        document.title = "React Material UI - Home";
-    }, []);
-
     const { addItemToShoppingCart, shoppingCart } = useShoppingCart();
 
     const category = useProductCategories(categoryId);

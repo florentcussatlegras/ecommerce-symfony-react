@@ -20,7 +20,7 @@ class OrderController extends AbstractController
     #[Route('/api/order/list', name: 'api_order_list', methods: 'GET')]
     public function list(NormalizerInterface $normalizer, EntityManagerInterface $entityManager): Response
     {
-        $userOrders = $entityManager->getRepository(UserOrder::class)->findBy(['user' => $this->getUser()]);
+        $userOrders = $entityManager->getRepository(UserOrder::class)->findBy(['user' => $this->getUser(), 'isValid' => 1]);
 
         $serializedUserOrders = $normalizer->normalize($userOrders, 'json', [
             'groups' => 'order:read'

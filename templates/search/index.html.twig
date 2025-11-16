@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello!{% endblock %}
+{% block title %}
+     {{ parent() }} - Rechercher un produit
+{% endblock %}
 
 {% block body %}
      <div {{ react_component('Search') }}>

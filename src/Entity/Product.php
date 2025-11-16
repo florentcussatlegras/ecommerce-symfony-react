@@ -43,7 +43,7 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type: 'integer', nullable: true)]
     #[Groups(['product:read', 'product:search'])]
     private ?int $price = null;
 

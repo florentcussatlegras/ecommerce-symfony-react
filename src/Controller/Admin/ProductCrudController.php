@@ -16,9 +16,7 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class ProductCrudController extends AbstractCrudController
 {
-    public function __construct(private StripeService $stripeService) {
-
-    }
+    public function __construct(private StripeService $stripeService) {}
 
     public static function getEntityFqcn(): string
     {
@@ -54,18 +52,37 @@ class ProductCrudController extends AbstractCrudController
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
+        // /** @var Product $product */
+        // $product = $entityInstance;
+
+        // $stripeProduct = $this->stripeService->createProduct($product);
+
+        // $product->setStripeProductId($stripeProduct->id);
+
+        // $stripePrice = $this->stripeService->createPrice($product);
+
+        // $product->setStripePriceId($stripePrice->id);
+
+        // parent::persistEntity($entityManager, $entityInstance);
+
         /** @var Product $product */
         $product = $entityInstance;
 
-        $stripeProduct = $this->stripeService->createProduct($product);
+        // 1. D'abord on laisse EasyAdmin sauvegarder + VichUploader uploader
+        parent::persistEntity($entityManager, $entityInstance);
 
+        // 2. Maintenant l'imageName existe
+        $entityManager->flush(); // obligatoire pour garantir que l'imageName est persisté
+
+        // 3. Création du produit Stripe avec imageName correctement rempli
+        $stripeProduct = $this->stripeService->createProduct($product);
         $product->setStripeProductId($stripeProduct->id);
 
         $stripePrice = $this->stripeService->createPrice($product);
-
         $product->setStripePriceId($stripePrice->id);
 
-        parent::persistEntity($entityManager, $entityInstance);
+        // 4. Mise à jour finale en BDD
+        $entityManager->flush();
     }
 
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void

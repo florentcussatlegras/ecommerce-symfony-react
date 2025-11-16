@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
 import { Image } from "@mui/icons-material";
+import { formatPrice } from "../../../utils";
 
 export default function ShoppingCartTable({
     removeItemFromShoppingCart,
@@ -71,7 +72,7 @@ export default function ShoppingCartTable({
                 </Table>
             </TableContainer>
             <Box marginY={5} display={"flex"} justifyContent={"right"}>
-                Total: {totalPrices / 100} € TTC
+                Total: {formatPrice(totalPrices)} TTC
             </Box>
         </>
     );

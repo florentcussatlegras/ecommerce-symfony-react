@@ -15,10 +15,6 @@ import useShoppingCart from "../hooks/useShoppingCart";
 import Layout from "./Layout";
 
 export default function Home() {
-    useEffect(() => {
-        document.title = "React Material UI - Home";
-    }, []);
-
     return (
         <Layout>
             <Banner />

@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+     {{ parent() }} - Votre commande
+{% endblock %}
+
 {% block body %}
     <div {{ react_component('Order') }} />
 {% endblock %}

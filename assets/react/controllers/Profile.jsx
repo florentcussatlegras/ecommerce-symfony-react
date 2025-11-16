@@ -1,6 +1,5 @@
 import {
     Box,
-    Grid,
     Container,
     Typography,
     Button,
@@ -8,9 +7,8 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableHead,
     TableRow,
-    Divider,
+    Link,
 } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import theme, { Colors } from "../../styles/theme";
@@ -22,6 +20,8 @@ import ShoppingCart from "../components/shoppingCart";
 import { UIProvider } from "../context/ui";
 import useShoppingCart from "../hooks/useShoppingCart";
 import { useEffect, useState } from "react";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { formatPrice } from "../../utils";
 
 export default function Profile() {
     const { shoppingCart } = useShoppingCart();
@@ -50,7 +50,28 @@ export default function Profile() {
                         <Typography variant="h4">Mon profil</Typography>
                     </Box>
                     <Box marginBottom={5} display="flex" flexDirection="column">
-                        <Typography variant="h5">Mes commandes</Typography>
+                        <Box
+                            display="flex"
+                            justifyContent={"space-between"}
+                            marginY={4}
+                        >
+                            <Typography variant="h5">Mes commandes</Typography>
+                            <Button variant="contained">
+                                <Link
+                                    href="/logout"
+                                    underline="none"
+                                    color={Colors.white}
+                                    sx={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: "10px",
+                                    }}
+                                >
+                                    <LogoutIcon />
+                                    Se déconnecter
+                                </Link>
+                            </Button>
+                        </Box>
                         {orders.length > 0 ? (
                             orders.map((order) => (
                                 <Box
@@ -68,7 +89,10 @@ export default function Profile() {
                                     >
                                         <Box display="flex" gap={4}>
                                             <span>Réf. {order.reference}</span>
-                                            <span>Total: {order.totalPrice / 100} € TTC </span>
+                                            <span>
+                                                {formatPrice(order.totalPrice)}{" "}
+                                                TTC{" "}
+                                            </span>
                                         </Box>
                                         <span>
                                             {new Intl.DateTimeFormat("fr-FR", {

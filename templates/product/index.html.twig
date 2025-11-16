@@ -1,6 +1,10 @@
 {# templates/home.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}
+     {{ parent() }} - Les produits
+{% endblock %}
+
 {% block body %}
     <div {{ react_component('Product', {'categoryId': categoryId}) }}>
 {% endblock %}

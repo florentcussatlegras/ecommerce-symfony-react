@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { ProductMetaWrapper } from "../../../styles/products";
+import { formatPrice } from "../../../utils";
 
 export default function ProductMeta({ product, matches }) {
     return (
@@ -8,7 +9,7 @@ export default function ProductMeta({ product, matches }) {
                 {product.name}
             </Typography>
             <Typography variant={matches ? "caption" : "body1"}>
-                {product.price / 100} €
+                {formatPrice(product.price)}
             </Typography>
         </ProductMetaWrapper>
     );

@@ -1,5 +1,5 @@
 import { Box, Grid, Typography, Button, Stack } from "@mui/material";
-import { visit } from "../../../utils";
+import { formatPrice, visit } from "../../../utils";
 import ShoppingCartTable from "../shoppingCart/shoppingCartTable";
 import { useEffect, useState } from "react";
 import useShoppingCart from "../../hooks/useShoppingCart";
@@ -42,7 +42,7 @@ export default function Order() {
                         alignItems="center"
                         gap={2}
                     >
-                        <Box>{totalPrices / 100} € TTC</Box>
+                        <Box>{formatPrice(totalPrices)} TTC</Box>
                         <Button
                             variant="contained"
                             color="primary"
@@ -93,28 +93,30 @@ export default function Order() {
                                     />{" "}
                                     <span>{item.product.name}</span>
                                     <span>{item.quantity}</span>
-                                    <span>{item.product.price / 100} €</span>
+                                    <span>
+                                        {formatPrice(item.product.price)} TTC
+                                    </span>
                                 </Box>
                             ))}
                         </Box>
                     )}
                     <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => visit("/")}
-                            sx={{
-                                width: { xs: "75%", md: "250px" },
-                                marginTop: "20px"
-                            }}
-                        >
-                            Continuer mes achats
-                        </Button>
+                        variant="contained"
+                        color="primary"
+                        onClick={() => visit("/")}
+                        sx={{
+                            width: { xs: "75%", md: "250px" },
+                            marginTop: "20px",
+                        }}
+                    >
+                        Continuer mes achats
+                    </Button>
                 </Box>
                 <Box
                     container
                     sx={{
                         width: { xs: "100%", md: "40%" },
-                        marginTop: { xs: "20px", md: "0px" }
+                        marginTop: { xs: "20px", md: "0px" },
                     }}
                 >
                     <Stack spacing={4}>
@@ -130,8 +132,7 @@ export default function Order() {
                                                 addresses.address_delivery
                                                     .firstname
                                             }
-                                        </span>
-                                        {" "}
+                                        </span>{" "}
                                         <span>
                                             {
                                                 addresses.address_delivery
@@ -161,8 +162,7 @@ export default function Order() {
                                                 addresses.address_billing
                                                     .firstname
                                             }
-                                        </span>
-                                        {" "}
+                                        </span>{" "}
                                         <span>
                                             {addresses.address_billing.lastname}
                                         </span>

@@ -10,10 +10,6 @@ import { UIProvider } from "../context/ui";
 import useShoppingCart from "../hooks/useShoppingCart";
 
 const Layout = ({ children }) => {
-    useEffect(() => {
-        document.title = "React Material UI - Home";
-    }, []);
-
     const { shoppingCart } = useShoppingCart();
 
     return (
