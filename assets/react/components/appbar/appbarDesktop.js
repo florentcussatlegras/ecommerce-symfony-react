@@ -5,6 +5,7 @@ import {
     ListItemButton,
     ListItemIcon,
     ListItemText,
+    IconButton
 } from "@mui/material";
 import { AppbarContainer, AppbarHeader, MyList } from "../../../styles/appbar";
 import SearchIcon from "@mui/icons-material/Search";
@@ -57,47 +58,33 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
             <Box
                 sx={{
                     display: "flex",
-                    justifyContent: "right",
+                    justifyContent: "flex-end",
                     flexGrow: 0,
                     alignItems: "center",
-                    width: "30%", // 👈 moitié de la largeur totale
+                    width: "10%", // ajustable
                     gap: 1,
                 }}
             >
-                <ListItemButton
+                {/* SEARCH : IconButton petit et contrôlé */}
+                <IconButton
+                    onClick={() => setShowSearchBox(true)}
                     disableRipple
-                    disableTouchRipple
                     sx={{
-                        width: "20px",
-                        minWidth: "20px",
+                        width: 20,
+                        height: 20,
+                        minWidth: 20,
                         padding: 0,
-                        "&.MuiListItemButton-root": {
-                            minWidth: "20px !important",
-                            paddingLeft: 0,
-                            paddingRight: 0,
-                        },
-                        "& .MuiListItemIcon-root": {
-                            minWidth: "20px !important",
-                        },
-                        "&:hover": {
-                            backgroundColor: "transparent",
-                        },
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        "&:hover": { backgroundColor: "transparent" },
+                        "&.Mui-focusVisible": { backgroundColor: "transparent" },
                     }}
                 >
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "right",
-                            color: Colors.dim_gray,
-                            width: "20px",
-                            minWidth: "20px",
-                            padding: 0,
-                        }}
-                    >
-                        <SearchIcon onClick={() => setShowSearchBox(true)} />
-                    </ListItemIcon>
-                </ListItemButton>
+                    <SearchIcon sx={{ color: Colors.dim_gray }} />
+                </IconButton>
 
+                {/* Actions (panier + profil) */}
                 <Actions shoppingCart={shoppingCart} />
             </Box>
         </AppbarContainer>
