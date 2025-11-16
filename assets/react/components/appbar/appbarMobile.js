@@ -6,14 +6,14 @@ import {
     ListItemButton,
     ListItemIcon,
 } from "@mui/material";
-import { AppbarContainer, AppbarHeader } from "../../../styles/appbar";
+import { AppbarContainer } from "../../../styles/appbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Colors } from "../../../styles/theme";
-import Actions from "./actions";
 import { useUIContext } from "../../context/ui";
+import { visit } from "../../../utils";
 
 export default function AppbarMobile({ shoppingCart }) {
     const { setDrawerOpen, setShowSearchBox } = useUIContext();
@@ -33,89 +33,55 @@ export default function AppbarMobile({ shoppingCart }) {
     };
 
     return (
-        <AppbarContainer>
+        <AppbarContainer
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                position: "relative",
+                padding: "8px 0px",
+            }}
+        >
+            {/* LEFT : menu */}
             <IconButton onClick={() => setDrawerOpen(true)}>
                 <MenuIcon />
             </IconButton>
 
+            {/* CENTER : logo parfaitement centré */}
             <Link
                 href="/"
                 fontFamily='"Montez", "cursive"'
-                fontSize="4em"
-                padding="4px"
-                flexGrow="1"
+                fontSize="2.5em"
                 underline="none"
-                textAlign="center"
-                marginLeft="100px"
+                sx={{
+                    position: "absolute",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    whiteSpace: "nowrap",
+                }}
             >
                 My Bags
             </Link>
 
-            <Box display={"flex"} marginLeft={"auto"} gap={2}>
+            {/* RIGHT : actions (search + panier + profile) */}
+            <Box display="flex" alignItems="center" gap={1} marginLeft="auto">
                 <IconButton onClick={() => setShowSearchBox(true)}>
                     <SearchIcon />
                 </IconButton>
-                <ListItemButton
-                    disableRipple
-                    disableTouchRipple
-                    sx={{
-                        display: "flex",
-                        justifyContent: "right",
-                        width: "20px",
-                        minWidth: "20px",
-                        padding: 0,
-                        "&:hover": {
-                            backgroundColor: "transparent",
-                        },
-                        "&:active": {
-                            backgroundColor: "transparent",
-                        },
-                    }}
-                >
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "right",
-                            color: Colors.dim_gray,
-                        }}
-                        onClick={showShoppingCart}
+
+                {/* Panier */}
+                <IconButton onClick={showShoppingCart}>
+                    <Badge
+                        badgeContent={calculateTotalQuantity()}
+                        color="secondary"
                     >
-                        <Badge
-                            badgeContent={calculateTotalQuantity()}
-                            color="secondary"
-                        >
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </ListItemIcon>
-                </ListItemButton>
-                <ListItemButton
-                    disableRipple
-                    disableTouchRipple
-                    sx={{
-                        display: "flex",
-                        justifyContent: "right",
-                        width: "20px",
-                        minWidth: "20px",
-                        padding: 0,
-                        "&:hover": {
-                            backgroundColor: "transparent",
-                        },
-                        "&:active": {
-                            backgroundColor: "transparent",
-                        },
-                    }}
-                >
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "right",
-                            color: Colors.dim_gray,
-                        }}
-                        onClick={showProfile}
-                    >
-                        <PersonIcon />
-                    </ListItemIcon>
-                </ListItemButton>
+                        <ShoppingCartIcon />
+                    </Badge>
+                </IconButton>
+
+                {/* Profile */}
+                <IconButton onClick={showProfile}>
+                    <PersonIcon />
+                </IconButton>
             </Box>
         </AppbarContainer>
     );

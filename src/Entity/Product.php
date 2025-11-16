@@ -56,6 +56,7 @@ class Product
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['product:read', 'product:search'])]
     private ?string $stripeProductId = null;
 
     #[ORM\Column(length: 255, nullable: true)]

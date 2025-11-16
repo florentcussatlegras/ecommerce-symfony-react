@@ -27,6 +27,11 @@ export const ProductImage = styled('img')(({ src, theme }) => ({
 export const ProductActionButton = styled(IconButton)(({ theme }) => ({
     background: Colors.white,
     margin: 4,
+    [theme.breakpoints.up("md")]: {
+        position: "relative",
+        top: 10,     // vers le bas
+        right: 10,   // vers la gauche
+    }
 }));
 
 export const ProductFavButton = styled(ProductActionButton, {
@@ -45,9 +50,12 @@ export const ProductAddToCart = styled(Button, {
 })(({ show, theme }) => ({
     width: "120px",
     fontSize: "12px",
+    color: Colors.white,
+    fontWeight: "bold",
+    border: "none",
     [theme.breakpoints.up("md")]: {
         position: "absolute",
-        bottom: "15%",
+        bottom: "20%",
         width: "300px",
         padding: "10px 5px",
         animation:

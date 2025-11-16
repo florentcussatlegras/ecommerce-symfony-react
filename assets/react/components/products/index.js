@@ -18,16 +18,17 @@ export default function Products({
 
     if (search == 0) {
         items = useProducts(category.id);
-    }else{
+    } else {
         items = JSON.parse(products);
-    };
+    }
 
     const renderProducts = items.map((product) => (
         <Grid
+            item
             key={product.id}
-            size={{ xs: 2, sm: 4, md: 4 }}
+            size={{ xs: 12, md: 6, xl: 4 }}
             display="flex"
-            flexDirection={"column"}
+            flexDirection="column"
             alignItems="center"
         >
             {matches ? (
@@ -60,15 +61,15 @@ export default function Products({
             <Grid
                 container
                 spacing={{ xs: 2, md: 6 }}
-                justifyContent={"left"}
-                sx={{ margin: "10px 4px 40px 4px" }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
+                sx={{ margin: "10px 0 40px 0" }}
             >
-                {items != undefined && items.length > 0 ? (
-                    renderProducts
-                ) : (
-                    search == 1 && <Typography variant="h5" marginY={5}>Aucun produits trouvés</Typography>
-                )}
+                {items != undefined && items.length > 0
+                    ? renderProducts
+                    : search == 1 && (
+                          <Typography variant="h5" marginY={5}>
+                              Aucun produits trouvés
+                          </Typography>
+                      )}
             </Grid>
         </>
 

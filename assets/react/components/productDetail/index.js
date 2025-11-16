@@ -106,7 +106,7 @@ export default function ProductDetail({
                     </Product>
                     <ProductDetailInfoWrapper>
                         <Typography variant="subtitle1">
-                            SKU {product.reference}
+                            SKU {product.stripeProductId.slice(5).toUpperCase()}
                         </Typography>
                         <Typography sx={{ lineHeight: 2 }} variant="h4">
                             {product.name}
@@ -114,6 +114,13 @@ export default function ProductDetail({
                         <Typography variant="body">
                             {product.description.replace(/<[^>]*>/g, "")}
                         </Typography>
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            sx={{ mt: 4 }}
+                        >
+                            {formatPrice(product.price)} TTC
+                        </Box>
                         <Box
                             sx={{ mt: 4 }}
                             display="flex"
@@ -132,13 +139,6 @@ export default function ProductDetail({
                             >
                                 Ajouter au panier
                             </Button>
-                        </Box>
-                        <Box
-                            display="flex"
-                            alignItems="center"
-                            sx={{ mt: 4 }}
-                        >
-                            {formatPrice(product.price)} TTC
                         </Box>
                         <Box
                             sx={{

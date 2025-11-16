@@ -3,31 +3,24 @@ import {
     Badge,
     Link,
     ListItemButton,
-    ListItemIcon,
     ListItemText,
     IconButton,
 } from "@mui/material";
-import { AppbarContainer, AppbarHeader, MyList } from "../../../styles/appbar";
+import { AppbarContainer } from "../../../styles/appbar";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import Actions from "./actions";
 import { useUIContext } from "../../context/ui";
 import useProductCategories from "../../hooks/useProductCategories";
 import { visit } from "../../../utils";
 import { Colors } from "../../../styles/theme";
 
-export default function AppbarDesktop({ matches, shoppingCart }) {
+export default function AppbarDesktop({ shoppingCart }) {
     const { setShowSearchBox } = useUIContext();
     const categories = useProductCategories();
 
-    const showShoppingCart = () => {
-        visit("/shopping-cart");
-    };
-
-    const showProfile = () => {
-        visit("/profile");
-    };
+    const showShoppingCart = () => visit("/shopping-cart");
+    const showProfile = () => visit("/profile");
 
     const calculateTotalQuantity = () => {
         return shoppingCart?.items
@@ -36,149 +29,147 @@ export default function AppbarDesktop({ matches, shoppingCart }) {
     };
 
     return (
-        <AppbarContainer>
-            {/* <AppbarHeader>
-                <Link>
-                My Bags
-
-                </Button>
-            </AppbarHeader> */}
+        <AppbarContainer
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                width: "100%",
+                padding: 0,
+            }}
+        >
+            {/* LEFT — LOGO */}
             <Link
                 href="/"
-                fontFamily='"Montez", "cursive"'
-                fontSize="4em"
-                padding="4px"
-                flexGrow="1"
                 underline="none"
+                fontFamily='"Montez", "cursive"'
                 sx={{
-                    width: { sm: "25%", lg: "20%", xl: "15%" }
+                    whiteSpace: "nowrap",
+                    flexShrink: 0,
+                    textAlign: "left",
+                    fontSize: {
+                        xs: "2em",
+                        sm: "2.5em",
+                        md: "3em",
+                        lg: "3.5em",
+                        xl: "4em",
+                    },
+                    width: {
+                        xs: "30%",
+                        sm: "27%",
+                        md: "25%",
+                        lg: "20%",
+                        xl: "15%",
+                    },
                 }}
             >
                 My Bags
             </Link>
 
+            {/* CENTER — CATEGORIES */}
             <Box
                 sx={{
+                    flexGrow: 1,
                     display: "flex",
                     justifyContent: "center",
-                    flexGrow: 1,
                     alignItems: "center",
-                    width: "10%", // ajustable
-                    gap: 1,
-                    width: { sm: "75%", lg: "80%", xl: "85%" },
-                    marginX: "30px",
+                    gap: {
+                        xs: 0.5,
+                        sm: 1,
+                        md: 2,
+                        lg: 3,
+                    },
+                    overflow: "hidden",
                 }}
             >
                 {categories.map((category) => (
                     <ListItemButton
+                        key={category.id}
                         onClick={() => visit(`/product/${category.id}`)}
                         sx={{
-                            width: "60px",
+                            whiteSpace: "nowrap",
+                            paddingX: 0,
+
+                            width: {
+                                sm: "120px", // tablette
+                                md: "125px", // tablette
+                                lg: "130px", // desktop
+                                xl: "150px", // large screen
+                            },
+                            minWidth: {
+                                sm: "120px", // tablette
+                                md: "125px", // tablette
+                                lg: "130px", // desktop
+                                xl: "150px", // large screen
+                            },
+                            maxWidth: {
+                                sm: "120px", // tablette
+                                md: "125px", // tablette
+                                lg: "130px", // desktop
+                                xl: "150px", // large screen
+                            },
+
+                            // Empêche ListItemText d'étirer le parent
+                            ".MuiListItemText-root": {
+                                flex: "none",
+                                width: "100%",
+                                textAlign: "center",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                            },
                         }}
                     >
                         <ListItemText
                             primary={category.name}
-                            sx={{
-                                display: "flex",
-                                justifyContent: "center",
-                            }}
+                            sx={{ textAlign: "center" }}
                         />
                     </ListItemButton>
                 ))}
             </Box>
 
+            {/* RIGHT — ICONS */}
             <Box
                 sx={{
+                    flexShrink: 0,
                     display: "flex",
-                    justifyContent: "flex-end",
-                    flexGrow: 0,
                     alignItems: "center",
-                    width: "10%", // ajustable
-                    gap: 1,
+                    gap: {
+                        xs: 1,
+                        sm: 1.5,
+                        md: 2,
+                        lg: 2,
+                    },
                 }}
             >
-                {/* SEARCH : IconButton petit et contrôlé */}
+                {/* Search icon */}
                 <IconButton
                     onClick={() => setShowSearchBox(true)}
-                    disableRipple
                     sx={{
-                        width: 20,
-                        height: 20,
-                        minWidth: 20,
-                        padding: 0,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        "&:hover": { backgroundColor: "transparent" },
-                        "&.Mui-focusVisible": {
-                            backgroundColor: "transparent",
-                        },
+                        color: Colors.dim_gray,
                     }}
                 >
-                    <SearchIcon sx={{ color: Colors.dim_gray }} />
+                    <SearchIcon />
                 </IconButton>
 
-                <ListItemButton
-                    disableRipple
-                    disableTouchRipple
-                    sx={{
-                        display: "flex",
-                        justifyContent: "right",
-                        width: "20px",
-                        minWidth: "20px",
-                        padding: 0,
-                        "&:hover": {
-                            backgroundColor: "transparent",
-                        },
-                        "&:active": {
-                            backgroundColor: "transparent",
-                        },
-                    }}
+                {/* Cart */}
+                <IconButton
+                    onClick={showShoppingCart}
+                    sx={{ color: Colors.dim_gray }}
                 >
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "right",
-                            color: Colors.dim_gray,
-                        }}
-                        onClick={showShoppingCart}
+                    <Badge
+                        badgeContent={calculateTotalQuantity()}
+                        color="secondary"
                     >
-                        <Badge
-                            badgeContent={calculateTotalQuantity()}
-                            color="secondary"
-                        >
-                            <ShoppingCartIcon />
-                        </Badge>
-                    </ListItemIcon>
-                </ListItemButton>
-                <ListItemButton
-                    disableRipple
-                    disableTouchRipple
-                    sx={{
-                        display: "flex",
-                        justifyContent: "right",
-                        width: "20px",
-                        minWidth: "20px",
-                        padding: 0,
-                        "&:hover": {
-                            backgroundColor: "transparent",
-                        },
-                        "&:active": {
-                            backgroundColor: "transparent",
-                        },
-                    }}
+                        <ShoppingCartIcon />
+                    </Badge>
+                </IconButton>
+
+                {/* Profile */}
+                <IconButton
+                    onClick={showProfile}
+                    sx={{ color: Colors.dim_gray }}
                 >
-                    <ListItemIcon
-                        sx={{
-                            display: "flex",
-                            justifyContent: "right",
-                            color: Colors.dim_gray,
-                        }}
-                        onClick={showProfile}
-                    >
-                        <PersonIcon />
-                    </ListItemIcon>
-                </ListItemButton>
+                    <PersonIcon />
+                </IconButton>
             </Box>
         </AppbarContainer>
     );
